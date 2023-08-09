@@ -1,11 +1,12 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { List, PresentationChart, X } from 'phosphor-react'
+import { List, PresentationChart, X, SignOut } from 'phosphor-react'
 import { NavItem } from './components/NavItem'
+import { useAuth } from '../../contexts/AuthContext'
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
+  const { signOut } = useAuth()
   function handleToggleMenuBar() {
     setIsOpen((state) => !state)
   }
@@ -25,17 +26,18 @@ export function Sidebar() {
         />
 
         <NavItem
-          title="Login teste"
-          isMenuOpen={isOpen}
-          icon={<X size={30} />}
-          redirectTo="/login"
-        />
-
-        <NavItem
           title="Transações"
           isMenuOpen={isOpen}
           icon={<X size={30} />}
           redirectTo="/transactions"
+        />
+
+        <NavItem
+          title="Sair"
+          redirectTo="/"
+          isMenuOpen={isOpen}
+          icon={<SignOut size={30} />}
+          onClick={signOut}
         />
       </S.NavBarContainer>
     </S.SidebarContainer>

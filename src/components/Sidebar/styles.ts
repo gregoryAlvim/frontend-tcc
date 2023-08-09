@@ -42,4 +42,13 @@ export const NavBarContainer = styled.nav<SidebarContainerProps>`
   gap: 2rem;
   display: flex;
   flex-direction: column;
+
+  button {
+    border: none;
+    background: transparent;
+    color: ${(props) => props.theme['gray-300']};
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 2rem;
+  }
 `
