@@ -1,10 +1,11 @@
 import { Routes } from './routes'
 import { GlobalStyle } from './styles/global'
-import { BrowserRouter } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
+import { AuthProvider } from './contexts/auth/AuthProvider'
 import { TransactionsProvider } from './contexts/TransactionsContext'
-import { AuthProvider } from './contexts/AuthContext'
 
 export function App() {
   return (
@@ -13,6 +14,13 @@ export function App() {
       <AuthProvider>
         <TransactionsProvider>
           <Routes />
+          <ToastContainer
+            closeOnClick
+            theme="light"
+            autoClose={3000}
+            toastClassName="foo"
+            limit={3}
+          />
         </TransactionsProvider>
       </AuthProvider>
     </ThemeProvider>
