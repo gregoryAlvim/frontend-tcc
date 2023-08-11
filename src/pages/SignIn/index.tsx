@@ -1,8 +1,9 @@
 import * as z from 'zod'
 import * as S from './styles'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '../../contexts/AuthContext'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const SignInSchema = z.object({
   username: z.string({
@@ -34,8 +35,9 @@ export function SignIn() {
     <S.SignInContainer>
       <S.SignInContent>
         <S.SignInForm onSubmit={handleSubmit(handleLoginData)}>
+          <S.SignInFormTitle>Login</S.SignInFormTitle>
           <S.SignInLabel>
-            <span>Nome de usuário</span>
+            <span>E-mail</span>
             <S.SignInInput type="text" required {...register('username')} />
           </S.SignInLabel>
           <S.SignInLabel>
@@ -44,6 +46,13 @@ export function SignIn() {
           </S.SignInLabel>
           <S.SignInButton disabled={isSubmitting}>Entrar</S.SignInButton>
         </S.SignInForm>
+
+        <S.SignUpContainer>
+          <S.SignUpTitle>Você ainda não tem uma conta?</S.SignUpTitle>
+          <Link to="/cadastro">
+            <S.SignUpButton>Inscrever-se</S.SignUpButton>
+          </Link>
+        </S.SignUpContainer>
       </S.SignInContent>
     </S.SignInContainer>
   )
