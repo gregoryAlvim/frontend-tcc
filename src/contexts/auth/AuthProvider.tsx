@@ -1,7 +1,7 @@
-import { api } from '../../lib/axios'
 import { toast } from 'react-toastify'
 import { User } from '../../@types/User'
 import { AuthContext } from './AuthContext'
+import { api, apiPrivate } from '../../lib/axios'
 import secureLocalStorage from 'react-secure-storage'
 import { ReactNode, useState, useEffect, useContext } from 'react'
 
@@ -35,7 +35,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       secureLocalStorage.setItem('@smartExpense:accessToken', accessToken)
       secureLocalStorage.setItem('@smartExpense:refreshToken', refreshToken)
 
-      api.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+      apiPrivate.defaults.headers.common.Authorization = `Bearer ${accessToken}`
 
       setUser({ ...user })
     } catch (error: any) {
@@ -57,19 +57,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
   }
 
-  async function refreshAccessToken() {
-    const refreshToken = secureLocalStorage.getItem(
-      '@smartExpense:refreshToken',
-    )
-
-    const response = await api.post('/auth/refresh', { refreshToken })
-
-    const { accessToken } = response.data
-
-    secureLocalStorage.removeItem('@smartExpense:accessToken')
-    secureLocalStorage.setItem('@smartExpense:accessToken', accessToken)
-  }
-
   useEffect(() => {
     const user = secureLocalStorage.getItem('@smartExpense:user')
     const accessToken = secureLocalStorage.getItem('@smartExpense:accessToken')
@@ -78,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     )
 
     if (accessToken && refreshToken && user) {
-      api.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+      apiPrivate.defaults.headers.common.Authorization = `Bearer ${accessToken}`
 
       const parsedUser = JSON.parse(`${user}`)
 
