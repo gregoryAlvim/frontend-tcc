@@ -94,6 +94,10 @@ export const SignUpContainer = styled.article`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  a {
+    margin-top: 3rem;
+  }
 `
 
 export const SignUpTitle = styled.span`
@@ -108,7 +112,7 @@ export const SignUpButton = styled.button`
   height: 5rem;
   border: none;
   border-radius: 6px;
-  margin-top: 3rem;
+
   color: ${(props) => props.theme['white-300']};
   background: ${(props) => props.theme['green-700']};
 

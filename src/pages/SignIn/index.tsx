@@ -2,8 +2,8 @@ import * as z from 'zod'
 import * as S from './styles'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useAuth } from '../../contexts/AuthContext'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAuth } from '../../contexts/auth/AuthProvider'
 
 const SignInSchema = z.object({
   username: z.string({
@@ -28,7 +28,7 @@ export function SignIn() {
   async function handleLoginData(data: SignInInputs) {
     const { username, password } = data
 
-    await signIn(username, password)
+    signIn(username, password)
   }
 
   return (

@@ -1,8 +1,8 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { List, PresentationChart, X, SignOut } from 'phosphor-react'
 import { NavItem } from './components/NavItem'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../contexts/auth/AuthProvider'
+import { List, PresentationChart, X, SignOut } from 'phosphor-react'
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
