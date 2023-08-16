@@ -1,6 +1,9 @@
 import * as S from './styles'
 import { Summary } from '../../components/Summary'
-import { MonthlyBalance } from './components'
+
+import { apiPrivate } from '../../lib/axios'
+import { toast } from 'react-toastify'
+import { MonthlyBalance } from './components/MonthlyBalance'
 
 export function Dashboard() {
   return (
@@ -14,6 +17,8 @@ export function Dashboard() {
       <MonthlyBalance />
 
       <S.DashboardSubTitle>Planejamentos</S.DashboardSubTitle>
+
+      <span>fazer depois que a tela de planejamentos estiver pronta!</span>
     </S.DashboardContainer>
   )
 }
