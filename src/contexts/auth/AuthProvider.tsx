@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { User } from '../../@types/User'
+import { User } from '../../@types/mockes'
 import { AuthContext } from './AuthContext'
 import { api, apiPrivate } from '../../lib/axios'
 import secureLocalStorage from 'react-secure-storage'

@@ -3,9 +3,9 @@ import * as S from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
-import { TransactionsContext } from '../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
+import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
+import { TransactionsContext } from '../../contexts/transactions/TransactionsContext'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
