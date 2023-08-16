@@ -1,19 +1,21 @@
 import { useContextSelector } from 'use-context-selector'
-import { TransactionsContext } from '../contexts/TransactionsContext'
+import { IncomeContext } from '../contexts/income/IncomeContext'
+import { ExpenseContext } from '../contexts/expense/ExpenseContext'
+import { TransactionsContext } from '../contexts/transactions/TransactionsContext'
 
 export function useSummary() {
   const transactions = useContextSelector(TransactionsContext, (context) => {
     return context.transactions
   })
 
-  const summary = transactions.reduce(
+  const summary = transactions?.reduce(
     (acc, transaction) => {
-      if (transaction.type === 'income') {
-        acc.income += transaction.price
-        acc.total += transaction.price
+      if (transaction.category.type === 'income') {
+        acc.income += transaction.value
+        acc.total += transaction.value
       } else {
-        acc.expense += transaction.price
-        acc.total -= transaction.price
+        acc.expense += transaction.value
+        acc.total -= transaction.value
       }
 
       return acc
