@@ -1,4 +1,5 @@
 import { Routes } from './routes'
+
 import Compose from './contexts/Compose'
 import { GlobalStyle } from './styles/global'
 import 'react-toastify/dist/ReactToastify.css'
@@ -15,7 +16,7 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
 
-      <Compose components={[AuthProvider, TransactionsProvider]}>
+      <AuthProvider>
         <Routes />
         <ToastContainer
           closeOnClick
@@ -24,7 +25,7 @@ export function App() {
           toastClassName="foo"
           limit={3}
         />
-      </Compose>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
