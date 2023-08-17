@@ -18,8 +18,9 @@ export function MonthlyBalance() {
       () =>
         setProgress({
           toIncome: 100,
-          toExpense:
-            Number((summary.expense / summary.income).toFixed(2)) * 100,
+          toExpense: Number(
+            ((summary.expense / summary.income) * 100).toFixed(0),
+          ),
         }),
       100,
     )

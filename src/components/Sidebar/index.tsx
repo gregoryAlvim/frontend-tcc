@@ -1,8 +1,14 @@
+import {
+  X,
+  List,
+  SignOut,
+  ListBullets,
+  PresentationChart,
+} from 'phosphor-react'
 import * as S from './styles'
 import { useState } from 'react'
 import { NavItem } from './components/NavItem'
 import { useAuth } from '../../contexts/auth/AuthProvider'
-import { List, PresentationChart, X, SignOut } from 'phosphor-react'
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -28,7 +34,7 @@ export function Sidebar() {
         <NavItem
           title="Transações"
           isMenuOpen={isOpen}
-          icon={<X size={30} />}
+          icon={<ListBullets size={30} />}
           redirectTo="/transactions"
         />
 

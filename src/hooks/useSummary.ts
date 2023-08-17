@@ -1,6 +1,4 @@
 import { useContextSelector } from 'use-context-selector'
-import { IncomeContext } from '../contexts/income/IncomeContext'
-import { ExpenseContext } from '../contexts/expense/ExpenseContext'
 import { TransactionsContext } from '../contexts/transactions/TransactionsContext'
 
 export function useSummary() {
