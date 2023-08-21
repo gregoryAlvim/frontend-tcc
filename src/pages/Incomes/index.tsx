@@ -1,17 +1,24 @@
-import {
-  Plus,
-  ArrowCircleUp,
-  CurrencyDollar,
-  ArrowCircleDown,
-  Hourglass,
-} from 'phosphor-react'
 import * as S from './styles'
+import { useState } from 'react'
 import { Menu } from '../../components/Menu'
-import { useIncomesSummary } from '../../hooks/useIncomesSummary'
 import { Summary } from '../../components/Summary'
+import { useContextSelector } from 'use-context-selector'
+import { CustomTable } from '../../components/CustomTable'
+import { DatePickerMenu } from '../../components/DatePickerMenu'
+import { useIncomesSummary } from '../../hooks/useIncomesSummary'
+import { IncomeContext } from '../../contexts/income/IncomeContext'
+import { Plus, Hourglass, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 
 export function Incomes() {
+  const currentDate = new Date()
   const summary = useIncomesSummary()
+  const [selectedDate, setSelectedDate] = useState(currentDate)
+  const { incomes, fetchIncomes } = useContextSelector(
+    IncomeContext,
+    (context) => {
+      return context
+    },
+  )
 
   const cardsToSummary = [
     {
@@ -31,6 +38,14 @@ export function Incomes() {
     },
   ]
 
+  const handleDateChange = (date: any) => {
+    setSelectedDate(date)
+
+    const year = date?.getFullYear()
+    const month = date?.getMonth() + 1
+    fetchIncomes(month, year)
+  }
+
   return (
     <S.IncomesContainer>
       <S.IncomesHeader>
@@ -41,7 +56,15 @@ export function Incomes() {
           Nova receita
         </S.NewIncomeButton>
       </S.IncomesHeader>
+
       <Summary cards={cardsToSummary} />
+
+      <DatePickerMenu
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+      />
+
+      <CustomTable data={incomes} />
     </S.IncomesContainer>
   )
 }

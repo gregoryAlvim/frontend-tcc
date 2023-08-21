@@ -1,12 +1,24 @@
 import * as S from './styles'
+import { useState } from 'react'
 import { Menu } from '../../components/Menu'
-import { useExpensesSummary } from '../../hooks/useExpenseSummary'
-import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
 import { Summary } from '../../components/Summary'
+import { useContextSelector } from 'use-context-selector'
+import { CustomTable } from '../../components/CustomTable'
+import { DatePickerMenu } from '../../components/DatePickerMenu'
+import { useExpensesSummary } from '../../hooks/useExpenseSummary'
+import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
+import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
 
 export function Expenses() {
+  const currentDate = new Date()
   const summary = useExpensesSummary()
-
+  const [selectedDate, setSelectedDate] = useState(currentDate)
+  const { expenses, fetchExpenses } = useContextSelector(
+    ExpenseContext,
+    (context) => {
+      return context
+    },
+  )
   const cardsToSummary = [
     {
       title: 'Pendentes',
@@ -25,6 +37,14 @@ export function Expenses() {
     },
   ]
 
+  const handleDateChange = (date: any) => {
+    setSelectedDate(date)
+
+    const year = date?.getFullYear()
+    const month = date?.getMonth() + 1
+    fetchExpenses(month, year)
+  }
+
   return (
     <S.ExpensesContainer>
       <S.ExpensesHeader>
@@ -37,6 +57,12 @@ export function Expenses() {
       </S.ExpensesHeader>
 
       <Summary cards={cardsToSummary} />
+
+      <DatePickerMenu
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+      />
+      <CustomTable data={expenses} />
     </S.ExpensesContainer>
   )
 }
