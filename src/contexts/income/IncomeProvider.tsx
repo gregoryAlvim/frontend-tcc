@@ -1,8 +1,9 @@
 import { toast } from 'react-toastify'
-import { Income } from '../../@types/mockes'
 import { apiPrivate } from '../../lib/axios'
 import { IncomeContext } from './IncomeContext'
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { incomesReducer } from '../../reducers/incomes/reducer'
+import { fetchIncomesAction } from '../../reducers/incomes/actions'
+import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 
 interface IncomeProviderProps {
   children: ReactNode
@@ -13,7 +14,13 @@ function showToastError(message: string) {
 }
 
 export function IncomeProvider({ children }: IncomeProviderProps) {
-  const [incomes, setIncomes] = useState<Income[]>([])
+  // const [incomes, setIncomes] = useState<Income[]>([])
+
+  const [incomesState, dispatch] = useReducer(incomesReducer, {
+    incomes: [],
+  })
+
+  const { incomes } = incomesState
 
   const fetchIncomes = useCallback(async (month?: string, year?: string) => {
     try {
@@ -24,14 +31,12 @@ export function IncomeProvider({ children }: IncomeProviderProps) {
         },
       })
 
-      setIncomes(response.data)
+      dispatch(fetchIncomesAction(response.data))
     } catch (error: any) {
       if (error.response.status) {
         showToastError(error.response.data.message)
       } else {
-        showToastError(
-          'Não foi possível acessar sua conta, tente novamente mais tarde!',
-        )
+        showToastError('Algo deu errado, tente novamente!')
       }
     }
   }, [])
