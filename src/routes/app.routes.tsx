@@ -7,10 +7,12 @@ import { Incomes } from '../pages/Incomes'
 import { Expenses } from '../pages/Expenses'
 import { IncomeProvider } from '../contexts/income/IncomeProvider'
 import { ExpenseProvider } from '../contexts/expense/ExpenseProvider'
+import Compose from '../contexts/Compose'
+import { CategoriesProvider } from '../contexts/categories/CategoriesProvider'
 
 export function AppRoutes() {
   return (
-    <TransactionsProvider>
+    <Compose components={[TransactionsProvider, CategoriesProvider]}>
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<Dashboard />} />
@@ -33,6 +35,6 @@ export function AppRoutes() {
           />
         </Route>
       </Routes>
-    </TransactionsProvider>
+    </Compose>
   )
 }
