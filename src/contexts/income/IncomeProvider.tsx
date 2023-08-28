@@ -4,6 +4,7 @@ import { IncomeContext } from './IncomeContext'
 import { incomesReducer } from '../../reducers/incomes/reducer'
 import { fetchIncomesAction } from '../../reducers/incomes/actions'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
+import { Income } from '../../@types/mockes'
 
 interface IncomeProviderProps {
   children: ReactNode
@@ -14,8 +15,6 @@ function showToastError(message: string) {
 }
 
 export function IncomeProvider({ children }: IncomeProviderProps) {
-  // const [incomes, setIncomes] = useState<Income[]>([])
-
   const [incomesState, dispatch] = useReducer(incomesReducer, {
     incomes: [],
   })
@@ -41,12 +40,26 @@ export function IncomeProvider({ children }: IncomeProviderProps) {
     }
   }, [])
 
+  async function createNewIncome(data: Income) {
+    const { value, description, category, date, isReceived } = data
+
+    await apiPrivate.post('incomes/create-income', {
+      category_uuid: category.id,
+      description,
+      isReceived,
+      value,
+      date,
+    })
+
+    fetchIncomes()
+  }
+
   useEffect(() => {
     fetchIncomes()
   }, [fetchIncomes])
 
   return (
-    <IncomeContext.Provider value={{ incomes, fetchIncomes }}>
+    <IncomeContext.Provider value={{ incomes, fetchIncomes, createNewIncome }}>
       {children}
     </IncomeContext.Provider>
   )
