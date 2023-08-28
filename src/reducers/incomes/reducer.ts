@@ -12,11 +12,6 @@ export function incomesReducer(state: IncomesState, action: any) {
         ...state,
         incomes: [...action.payload.incomes],
       }
-    case ActionTypesToIncome.ADD_NEW_INCOME:
-      return {
-        ...state,
-        incomes: [...state.incomes, action.payload.newIncome],
-      }
     default:
       return state
   }

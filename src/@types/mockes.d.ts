@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export interface User {
   id: string
   name: string
@@ -16,20 +18,20 @@ export interface Category {
 }
 
 export interface Expense {
-  id: string
+  id?: string
   date: string
   value: number
   isPay: boolean
-  createdAt: string
+  createdAt?: string
   category: Category
   description: string
 }
 
 export interface Income {
-  id: string
+  id?: string
   date: string
   value: number
-  createdAt: string
+  createdAt?: string
   category: Category
   description: string
   isReceived: boolean

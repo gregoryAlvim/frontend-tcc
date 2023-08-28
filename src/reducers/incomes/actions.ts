@@ -13,12 +13,3 @@ export function fetchIncomesAction(incomes: Income[]) {
     },
   }
 }
-
-export function addNewIncomeAction(newIncome: Income) {
-  return {
-    type: ActionTypesToIncome.ADD_NEW_INCOME,
-    payload: {
-      newIncome,
-    },
-  }
-}

@@ -16,26 +16,6 @@ export const IncomesHeader = styled.header`
   margin-bottom: 2rem;
 `
 
-export const NewIncomeButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  padding: 1rem 1.5rem;
-  border-radius: 6px;
-
-  background: transparent;
-  color: ${(props) => props.theme['green-300']};
-  border: 1px solid ${(props) => props.theme['green-300']};
-  cursor: pointer;
-
-  &:hover {
-    background: ${(props) => props.theme['green-300']};
-    color: ${(props) => props.theme.white};
-    transition: all 0.3s;
-  }
-`
-
 export const TransactionsTable = styled.table`
   width: 100%;
   border-collapse: separate;

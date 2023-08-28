@@ -8,6 +8,7 @@ import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useIncomesSummary } from '../../hooks/useIncomesSummary'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { Plus, Hourglass, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
+import { DialogButton } from '../../components/DialogButton'
 
 export function Incomes() {
   const currentDate = new Date()
@@ -51,19 +52,13 @@ export function Incomes() {
       <S.IncomesHeader>
         <Menu initialIndexSelected={1} />
 
-        <S.NewIncomeButton>
-          <Plus size={18} />
-          Nova receita
-        </S.NewIncomeButton>
+        <DialogButton title="Nova receita" icon={<Plus />} />
       </S.IncomesHeader>
-
       <Summary cards={cardsToSummary} />
-
       <DatePickerMenu
         selectedDate={selectedDate}
         handleDateChange={handleDateChange}
       />
-
       <CustomTable data={incomes} />
     </S.IncomesContainer>
   )
