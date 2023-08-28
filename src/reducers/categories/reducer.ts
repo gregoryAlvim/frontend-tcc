@@ -3,6 +3,8 @@ import { ActionTypesToCategories } from './actions'
 
 interface CategoriesState {
   categories: Category[]
+  categoriesToIncome: Category[]
+  categoriesToExpense: Category[]
 }
 
 export function categoriesReducer(state: CategoriesState, action: any) {
@@ -10,7 +12,11 @@ export function categoriesReducer(state: CategoriesState, action: any) {
     case ActionTypesToCategories.FETCH_CATEGORIES:
       return {
         ...state,
-        categories: [action.payload.categories],
+        categories: [...action.payload.categories.allCategoriesHTTP],
+        categoriesToIncome: [...action.payload.categories.incomeCategoriesHTTP],
+        categoriesToExpense: [
+          ...action.payload.categories.expenseCategoriesHTTP,
+        ],
       }
     case ActionTypesToCategories.ADD_NEW_CATEGORY:
       return {

@@ -16,15 +16,18 @@ function showToastError(message: string) {
 export function CategoriesProvider({ children }: CategoriesProviderProps) {
   const [categoriesState, dispatch] = useReducer(categoriesReducer, {
     categories: [],
+    categoriesToIncome: [],
+    categoriesToExpense: [],
   })
 
-  const { categories } = categoriesState
+  const { categories, categoriesToIncome, categoriesToExpense } =
+    categoriesState
 
   const fetchCategories = useCallback(async () => {
     try {
       const response = await apiPrivate.get('categories/get-all')
-
-      dispatch(fetchCategoriesAction(response.data?.allCategoriesHTTP))
+      console.log(response.data.allCategoriesHTTP.length)
+      dispatch(fetchCategoriesAction(response.data))
     } catch (error: any) {
       if (error.response.status) {
         showToastError(error.response.data.message)
@@ -39,7 +42,9 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
   }, [fetchCategories])
 
   return (
-    <CategoriesContext.Provider value={{ categories }}>
+    <CategoriesContext.Provider
+      value={{ categories, categoriesToIncome, categoriesToExpense }}
+    >
       {children}
     </CategoriesContext.Provider>
   )
