@@ -7,11 +7,12 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as Switch from '@radix-ui/react-switch'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Category, Income } from '../../@types/mockes'
+import { Category, Expense, Income } from '../../@types/mockes'
 import { useContextSelector } from 'use-context-selector'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { ArrowCircleDown, ArrowCircleUp, CheckCircle, X } from 'phosphor-react'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
+import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -24,7 +25,13 @@ const newTransactionFormSchema = z.object({
 
 type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
 
-export function NewTransactionModal() {
+interface NewTransactionModalProps {
+  typeOfButton: 'income' | 'expense'
+}
+
+export function NewTransactionModal({
+  typeOfButton = 'income',
+}: NewTransactionModalProps) {
   const [typeOptions, setTypeOptions] = useState<'income' | 'expense'>('income')
 
   function handleSetTypeOptions(type: 'income' | 'expense') {
@@ -40,6 +47,10 @@ export function NewTransactionModal() {
 
   const createNewIncome = useContextSelector(IncomeContext, (context) => {
     return context.createNewIncome
+  })
+
+  const createNewExpense = useContextSelector(ExpenseContext, (context) => {
+    return context.createNewExpense
   })
 
   function createOptionsToSelect(items: Category[]) {
@@ -70,7 +81,7 @@ export function NewTransactionModal() {
   } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
     defaultValues: {
-      type: 'income',
+      type: typeOfButton,
       isPayOrIsReceived: false,
     },
   })
@@ -97,6 +108,23 @@ export function NewTransactionModal() {
         }
 
         createNewIncome(newIncome)
+        reset()
+      }
+    } else if (type === 'expense') {
+      const category = categoriesToExpense.find(
+        (item) => item.id === categoryUUID,
+      )
+
+      if (category !== undefined) {
+        const newExpense: Expense = {
+          description,
+          date: formattedDate,
+          value,
+          category,
+          isPay: isPayOrIsReceived,
+        }
+
+        createNewExpense(newExpense)
         reset()
       }
     }
