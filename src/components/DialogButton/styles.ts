@@ -16,7 +16,11 @@ export const HeaderContent = styled.div`
   align-items: center;
 `
 
-export const NewTransactionButton = styled.button`
+interface NewTransactionButtonProps {
+  variant?: 'income' | 'expense'
+}
+
+export const NewTransactionButton = styled.button<NewTransactionButtonProps>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -25,12 +29,22 @@ export const NewTransactionButton = styled.button`
   border-radius: 6px;
 
   background: transparent;
-  color: ${(props) => props.theme['green-300']};
-  border: 1px solid ${(props) => props.theme['green-300']};
+  color: ${(props) =>
+    props.variant === 'income'
+      ? props.theme['green-300']
+      : props.theme['red-300']};
+  border: 1px solid
+    ${(props) =>
+      props.variant === 'income'
+        ? props.theme['green-300']
+        : props.theme['red-300']};
   cursor: pointer;
 
   &:hover {
-    background: ${(props) => props.theme['green-300']};
+    background: ${(props) =>
+      props.variant === 'income'
+        ? props.theme['green-300']
+        : props.theme['red-300']};
     color: ${(props) => props.theme.white};
     transition: all 0.3s;
   }

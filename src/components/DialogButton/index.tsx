@@ -5,19 +5,24 @@ import { NewTransactionModal } from '../NewTransactionModal'
 interface DialogButtonProps {
   title: string
   icon: React.ReactNode
+  type?: 'income' | 'expense'
 }
 
-export function DialogButton({ title, icon }: DialogButtonProps) {
+export function DialogButton({
+  title,
+  icon,
+  type = 'income',
+}: DialogButtonProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <S.NewTransactionButton>
+        <S.NewTransactionButton variant={type}>
           {icon}
           {title}
         </S.NewTransactionButton>
       </Dialog.Trigger>
 
-      <NewTransactionModal />
+      <NewTransactionModal typeOfButton={type} />
     </Dialog.Root>
   )
 }
