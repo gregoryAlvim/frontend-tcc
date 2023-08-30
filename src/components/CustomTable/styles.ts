@@ -24,6 +24,11 @@ export const TransactionsTable = styled.table`
       font-size: 1.4rem;
     }
   }
+
+  .actionsToItemsTable {
+    display: flex;
+    gap: 1rem;
+  }
 `
 
 interface PriceHighLightProps {
@@ -35,4 +40,16 @@ export const PriceHighLight = styled.span<PriceHighLightProps>`
     props.variant === 'income'
       ? props.theme['green-300']
       : props.theme['red-300']};
+`
+
+export const deleteItemButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: ${(props) => props.theme['red-300']};
+  cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.theme['red-700']};
+    transition: all 0.3s;
+  }
 `

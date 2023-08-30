@@ -1,8 +1,11 @@
 import * as S from './styles'
 import { Expense, Income } from '../../@types/mockes'
 import { priceFormatter } from '../../utils/formatter'
-import { CheckCircle, Hourglass, PencilSimple } from 'phosphor-react'
+import { useContextSelector } from 'use-context-selector'
 import { UpdateDialogButton } from '../UpdateDialogButton'
+import { IncomeContext } from '../../contexts/income/IncomeContext'
+import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
+import { CheckCircle, Hourglass, PencilSimple, X } from 'phosphor-react'
 
 interface CustomTableProps {
   data: (Income | Expense)[]
@@ -10,6 +13,24 @@ interface CustomTableProps {
 }
 
 export function CustomTable({ data, type }: CustomTableProps) {
+  const deleteIncome = useContextSelector(IncomeContext, (context) => {
+    return context.deleteIncome
+  })
+
+  const deleteExpense = useContextSelector(ExpenseContext, (context) => {
+    return context.deleteExpense
+  })
+
+  function handleActionDeleteItem(itemId: string | undefined) {
+    if (itemId !== undefined) {
+      if (type === 'income') {
+        deleteIncome(itemId)
+      } else {
+        deleteExpense(itemId)
+      }
+    }
+  }
+
   function hasIsReceivedOrIsPay(item: any) {
     return item.category.type === 'income' ? item?.isReceived : item?.isPay
   }
@@ -58,13 +79,20 @@ export function CustomTable({ data, type }: CustomTableProps) {
             <td>{item.category.name}</td>
 
             <td>{item.date}</td>
-            <td>
+            <td className="actionsToItemsTable">
               {
                 <UpdateDialogButton
                   type={type}
                   data={item}
                   icon={<PencilSimple size={18} />}
                 />
+              }
+              {
+                <S.deleteItemButton
+                  onClick={() => handleActionDeleteItem(item?.id)}
+                >
+                  <X />
+                </S.deleteItemButton>
               }
             </td>
           </tr>
