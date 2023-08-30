@@ -54,12 +54,30 @@ export function IncomeProvider({ children }: IncomeProviderProps) {
     fetchIncomes()
   }
 
+  async function updateIncome(data: Income) {
+    const { id, value, description, category, date, isReceived } = data
+
+    const response = await apiPrivate.patch(`incomes/update-income-by/${id}`, {
+      category_uuid: category.id,
+      description,
+      isReceived,
+      value,
+      date,
+    })
+
+    toast.success(response.data.message)
+
+    fetchIncomes()
+  }
+
   useEffect(() => {
     fetchIncomes()
   }, [fetchIncomes])
 
   return (
-    <IncomeContext.Provider value={{ incomes, fetchIncomes, createNewIncome }}>
+    <IncomeContext.Provider
+      value={{ incomes, fetchIncomes, createNewIncome, updateIncome }}
+    >
       {children}
     </IncomeContext.Provider>
   )
