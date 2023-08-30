@@ -5,6 +5,7 @@ interface ExpenseContextType {
   expenses: Expense[]
   fetchExpenses: (month: string, year: string) => void
   createNewExpense: (data: Expense) => void
+  updateExpense: (data: Expense) => void
 }
 
 export const ExpenseContext = createContext({} as ExpenseContextType)

@@ -1,17 +1,13 @@
-import { toast } from 'react-toastify'
 import { apiPrivate } from '../../lib/axios'
 import { Expense } from '../../@types/mockes'
 import { ExpenseContext } from './ExpenseContext'
 import { ReactNode, useCallback, useEffect, useReducer, useState } from 'react'
 import { expensesReducer } from '../../reducers/expenses/reducer'
 import { fetchExpensesAction } from '../../reducers/expenses/actions'
+import { ToastMessages } from '../../utils/ToastMessages'
 
 interface ExpenseProviderProps {
   children: ReactNode
-}
-
-function showToastError(message: string) {
-  toast.error(message)
 }
 
 export function ExpenseProvider({ children }: ExpenseProviderProps) {
@@ -33,9 +29,9 @@ export function ExpenseProvider({ children }: ExpenseProviderProps) {
       dispatch(fetchExpensesAction(response.data))
     } catch (error: any) {
       if (error.response.status) {
-        showToastError(error.response.data.message)
+        ToastMessages.showToastError(error.response.data.message)
       } else {
-        showToastError('Algo deu errado, tente novamente!')
+        ToastMessages.showToastError('Algo deu errado, tente novamente!')
       }
     }
   }, [])
@@ -43,13 +39,34 @@ export function ExpenseProvider({ children }: ExpenseProviderProps) {
   async function createNewExpense(data: Expense) {
     const { value, description, category, date, isPay } = data
 
-    await apiPrivate.post('expenses/create-expense', {
+    const response = await apiPrivate.post('expenses/create-expense', {
       category_uuid: category.id,
       description,
       isPay,
       value,
       date,
     })
+
+    ToastMessages.showToastSuccess(response.data.message)
+
+    fetchExpenses()
+  }
+
+  async function updateExpense(data: Expense) {
+    const { id, value, description, category, date, isPay } = data
+
+    const response = await apiPrivate.patch(
+      `expenses/update-expense-by/${id}`,
+      {
+        category_uuid: category.id,
+        description,
+        isPay,
+        value,
+        date,
+      },
+    )
+
+    ToastMessages.showToastSuccess(response.data.message)
 
     fetchExpenses()
   }
@@ -60,7 +77,7 @@ export function ExpenseProvider({ children }: ExpenseProviderProps) {
 
   return (
     <ExpenseContext.Provider
-      value={{ expenses, fetchExpenses, createNewExpense }}
+      value={{ expenses, fetchExpenses, createNewExpense, updateExpense }}
     >
       {children}
     </ExpenseContext.Provider>

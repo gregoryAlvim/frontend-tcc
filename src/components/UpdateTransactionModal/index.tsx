@@ -2,6 +2,7 @@ import * as z from 'zod'
 import * as S from './styles'
 import Select from 'react-select'
 import { parse, format } from 'date-fns'
+import { CheckCircle, X } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as Switch from '@radix-ui/react-switch'
 import { Controller, useForm } from 'react-hook-form'
@@ -10,7 +11,6 @@ import { useContextSelector } from 'use-context-selector'
 import { Category, Expense, Income } from '../../@types/mockes'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
-import { CheckCircle, X } from 'phosphor-react'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
 
 const updateTransactionFormSchema = z.object({
@@ -45,8 +45,8 @@ export function UpdateTransactionModal({
     return context.updateIncome
   })
 
-  const createNewExpense = useContextSelector(ExpenseContext, (context) => {
-    return context.createNewExpense
+  const updateExpense = useContextSelector(ExpenseContext, (context) => {
+    return context.updateExpense
   })
 
   function createOptionsToSelect(items: Category[]) {
@@ -78,7 +78,6 @@ export function UpdateTransactionModal({
   const formattedDate = format(inputDate, 'yyyy-MM-dd')
 
   const {
-    reset,
     control,
     register,
     handleSubmit,
@@ -136,30 +135,29 @@ export function UpdateTransactionModal({
           date: formattedDate,
           isReceived: isPayOrIsReceived,
         }
-        console.log(newIncome)
+
         updateIncome(newIncome)
         simulateEscapeKey()
       }
     } else if (type === 'expense') {
       const category = categoriesToExpense.find(
-        (item) => item.id === categoryUUID,
+        (item) => item.id === categoryUUID || item.name === categoryUUID,
       )
 
       if (category !== undefined) {
         const newExpense: Expense = {
-          description,
-          date: formattedDate,
+          id,
           value,
           category,
+          description,
+          date: formattedDate,
           isPay: isPayOrIsReceived,
         }
 
-        createNewExpense(newExpense)
-        reset()
+        updateExpense(newExpense)
+        simulateEscapeKey()
       }
     }
-
-    reset()
   }
 
   return (
