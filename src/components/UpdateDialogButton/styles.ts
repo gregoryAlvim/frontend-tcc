@@ -11,7 +11,7 @@ export const NewTransactionButton = styled.button<NewTransactionButtonProps>`
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['purple-500']};
     transition: all 0.3s;
   }
 `
