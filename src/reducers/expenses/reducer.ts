@@ -12,6 +12,15 @@ export function expensesReducer(state: ExpensesState, action: any) {
         ...state,
         expenses: [...action.payload.expenses],
       }
+    case ActionTypesToExpense.DELETE_EXPENSE:
+      return {
+        ...state,
+        expenses: [
+          ...state.expenses.filter(
+            (expense) => expense.id !== action.payload.expenseId,
+          ),
+        ],
+      }
     default:
       return state
   }
