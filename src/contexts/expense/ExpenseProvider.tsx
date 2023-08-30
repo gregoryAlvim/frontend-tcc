@@ -1,10 +1,13 @@
+import {
+  deleteExpenseAction,
+  fetchExpensesAction,
+} from '../../reducers/expenses/actions'
 import { apiPrivate } from '../../lib/axios'
 import { Expense } from '../../@types/mockes'
 import { ExpenseContext } from './ExpenseContext'
-import { ReactNode, useCallback, useEffect, useReducer, useState } from 'react'
-import { expensesReducer } from '../../reducers/expenses/reducer'
-import { fetchExpensesAction } from '../../reducers/expenses/actions'
 import { ToastMessages } from '../../utils/ToastMessages'
+import { expensesReducer } from '../../reducers/expenses/reducer'
+import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 
 interface ExpenseProviderProps {
   children: ReactNode
@@ -71,13 +74,29 @@ export function ExpenseProvider({ children }: ExpenseProviderProps) {
     fetchExpenses()
   }
 
+  async function deleteExpense(expenseId: string) {
+    const response = await apiPrivate.delete(
+      `/expenses/delete-expense-by/${expenseId}`,
+    )
+
+    dispatch(deleteExpenseAction(expenseId))
+
+    ToastMessages.showToastSuccess(response.data.message)
+  }
+
   useEffect(() => {
     fetchExpenses()
   }, [fetchExpenses])
 
   return (
     <ExpenseContext.Provider
-      value={{ expenses, fetchExpenses, createNewExpense, updateExpense }}
+      value={{
+        expenses,
+        fetchExpenses,
+        createNewExpense,
+        updateExpense,
+        deleteExpense,
+      }}
     >
       {children}
     </ExpenseContext.Provider>

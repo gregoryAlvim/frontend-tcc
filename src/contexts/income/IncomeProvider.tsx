@@ -1,10 +1,13 @@
 import { apiPrivate } from '../../lib/axios'
-import { IncomeContext } from './IncomeContext'
-import { incomesReducer } from '../../reducers/incomes/reducer'
-import { fetchIncomesAction } from '../../reducers/incomes/actions'
-import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 import { Income } from '../../@types/mockes'
+import { IncomeContext } from './IncomeContext'
 import { ToastMessages } from '../../utils/ToastMessages'
+import { incomesReducer } from '../../reducers/incomes/reducer'
+import {
+  deleteIncomeAction,
+  fetchIncomesAction,
+} from '../../reducers/incomes/actions'
+import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 
 interface IncomeProviderProps {
   children: ReactNode
@@ -68,13 +71,29 @@ export function IncomeProvider({ children }: IncomeProviderProps) {
     fetchIncomes()
   }
 
+  async function deleteIncome(incomeId: string) {
+    const response = await apiPrivate.delete(
+      `/incomes/delete-income-by/${incomeId}`,
+    )
+
+    dispatch(deleteIncomeAction(incomeId))
+
+    ToastMessages.showToastSuccess(response.data.message)
+  }
+
   useEffect(() => {
     fetchIncomes()
   }, [fetchIncomes])
 
   return (
     <IncomeContext.Provider
-      value={{ incomes, fetchIncomes, createNewIncome, updateIncome }}
+      value={{
+        incomes,
+        fetchIncomes,
+        createNewIncome,
+        updateIncome,
+        deleteIncome,
+      }}
     >
       {children}
     </IncomeContext.Provider>

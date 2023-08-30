@@ -6,6 +6,7 @@ interface IncomeContextType {
   fetchIncomes: (month: string, year: string) => void
   createNewIncome: (data: Income) => void
   updateIncome: (data: Income) => void
+  deleteIncome: (incomeId: string) => void
 }
 
 export const IncomeContext = createContext({} as IncomeContextType)
