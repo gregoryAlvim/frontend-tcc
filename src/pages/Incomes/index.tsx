@@ -59,7 +59,7 @@ export function Incomes() {
         selectedDate={selectedDate}
         handleDateChange={handleDateChange}
       />
-      <CustomTable data={incomes} />
+      <CustomTable type="income" data={incomes} />
     </S.IncomesContainer>
   )
 }

@@ -32,7 +32,9 @@ interface NewTransactionModalProps {
 export function NewTransactionModal({
   typeOfButton = 'income',
 }: NewTransactionModalProps) {
-  const [typeOptions, setTypeOptions] = useState<'income' | 'expense'>('income')
+  const [typeOptions, setTypeOptions] = useState<'income' | 'expense'>(
+    typeOfButton,
+  )
 
   function handleSetTypeOptions(type: 'income' | 'expense') {
     setTypeOptions(type)

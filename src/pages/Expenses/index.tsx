@@ -60,7 +60,7 @@ export function Expenses() {
         selectedDate={selectedDate}
         handleDateChange={handleDateChange}
       />
-      <CustomTable data={expenses} />
+      <CustomTable type="expense" data={expenses} />
     </S.ExpensesContainer>
   )
 }

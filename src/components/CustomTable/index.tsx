@@ -1,13 +1,15 @@
 import * as S from './styles'
 import { Expense, Income } from '../../@types/mockes'
 import { priceFormatter } from '../../utils/formatter'
-import { CheckCircle, Hourglass } from 'phosphor-react'
+import { CheckCircle, Hourglass, PencilSimple } from 'phosphor-react'
+import { UpdateDialogButton } from '../UpdateDialogButton'
 
 interface CustomTableProps {
   data: (Income | Expense)[]
+  type?: 'income' | 'expense'
 }
 
-export function CustomTable({ data }: CustomTableProps) {
+export function CustomTable({ data, type }: CustomTableProps) {
   function hasIsReceivedOrIsPay(item: any) {
     return item.category.type === 'income' ? item?.isReceived : item?.isPay
   }
@@ -56,7 +58,15 @@ export function CustomTable({ data }: CustomTableProps) {
             <td>{item.category.name}</td>
 
             <td>{item.date}</td>
-            <td></td>
+            <td>
+              {
+                <UpdateDialogButton
+                  type={type}
+                  data={item}
+                  icon={<PencilSimple size={18} />}
+                />
+              }
+            </td>
           </tr>
         ))}
       </tbody>
