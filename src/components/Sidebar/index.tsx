@@ -4,6 +4,7 @@ import {
   SignOut,
   ListBullets,
   PresentationChart,
+  Target,
 } from 'phosphor-react'
 import * as S from './styles'
 import { useState } from 'react'
@@ -36,6 +37,13 @@ export function Sidebar() {
           isMenuOpen={isOpen}
           icon={<ListBullets size={30} />}
           redirectTo="/transactions"
+        />
+
+        <NavItem
+          title="Objetivos"
+          redirectTo="/objectives"
+          isMenuOpen={isOpen}
+          icon={<Target size={30} />}
         />
 
         <NavItem
