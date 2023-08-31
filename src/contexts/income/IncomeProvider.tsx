@@ -1,12 +1,12 @@
 import { apiPrivate } from '../../lib/axios'
 import { Income } from '../../@types/mockes'
-import { IncomeContext } from './IncomeContext'
-import { ToastMessages } from '../../utils/ToastMessages'
-import { incomesReducer } from '../../reducers/incomes/reducer'
 import {
   deleteIncomeAction,
   fetchIncomesAction,
 } from '../../reducers/incomes/actions'
+import { IncomeContext } from './IncomeContext'
+import { ToastMessages } from '../../utils/ToastMessages'
+import { incomesReducer } from '../../reducers/incomes/reducer'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 
 interface IncomeProviderProps {

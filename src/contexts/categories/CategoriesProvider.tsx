@@ -26,7 +26,7 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
   const fetchCategories = useCallback(async () => {
     try {
       const response = await apiPrivate.get('categories/get-all')
-      console.log(response.data.allCategoriesHTTP.length)
+
       dispatch(fetchCategoriesAction(response.data))
     } catch (error: any) {
       if (error.response.status) {

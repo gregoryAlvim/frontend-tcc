@@ -9,6 +9,7 @@ import { useIncomesSummary } from '../../hooks/useIncomesSummary'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { Plus, Hourglass, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { DialogButton } from '../../components/DialogButton'
+import { priceFormatter } from '../../utils/formatter'
 
 export function Incomes() {
   const currentDate = new Date()
@@ -25,17 +26,17 @@ export function Incomes() {
     {
       title: 'Pendentes',
       icon: <Hourglass size={32} color="#FFA500" />,
-      value: summary.pendentes,
+      value: priceFormatter.format(summary.pendentes),
     },
     {
       title: 'Recebidas',
       icon: <ArrowCircleUp size={32} color="#00b37e" />,
-      value: summary.recebidas,
+      value: priceFormatter.format(summary.recebidas),
     },
     {
       title: 'Previsto',
       icon: <CurrencyDollar size={32} color="#fff" />,
-      value: summary.previsto,
+      value: priceFormatter.format(summary.previsto),
     },
   ]
 

@@ -2,13 +2,14 @@ import * as S from './styles'
 import { useState } from 'react'
 import { Menu } from '../../components/Menu'
 import { Summary } from '../../components/Summary'
+import { priceFormatter } from '../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
 import { CustomTable } from '../../components/CustomTable'
+import { DialogButton } from '../../components/DialogButton'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useExpensesSummary } from '../../hooks/useExpenseSummary'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
-import { DialogButton } from '../../components/DialogButton'
 
 export function Expenses() {
   const currentDate = new Date()
@@ -24,17 +25,17 @@ export function Expenses() {
     {
       title: 'Pendentes',
       icon: <Hourglass size={32} color="#F75A68" />,
-      value: summary.pendentes,
+      value: priceFormatter.format(summary.pendentes),
     },
     {
       title: 'Pagas',
       icon: <ArrowCircleUp size={32} color="#00b37e" />,
-      value: summary.pagas,
+      value: priceFormatter.format(summary.pagas),
     },
     {
       title: 'Previsto',
       icon: <CurrencyDollar size={32} color="#fff" />,
-      value: summary.previsto,
+      value: priceFormatter.format(summary.previsto),
     },
   ]
 

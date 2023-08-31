@@ -1,11 +1,9 @@
 import * as S from './styles'
 import { Summary } from '../../components/Summary'
-
-import { apiPrivate } from '../../lib/axios'
-import { toast } from 'react-toastify'
+import { useSummary } from '../../hooks/useSummary'
+import { priceFormatter } from '../../utils/formatter'
 import { MonthlyBalance } from './components/MonthlyBalance'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
-import { useSummary } from '../../hooks/useSummary'
 
 export function Dashboard() {
   const summary = useSummary()
@@ -14,17 +12,17 @@ export function Dashboard() {
     {
       title: 'Entradas',
       icon: <ArrowCircleUp size={32} color="#00b37e" />,
-      value: summary.income,
+      value: priceFormatter.format(summary.income),
     },
     {
       title: 'Saídas',
       icon: <ArrowCircleDown size={32} color="#f75a68" />,
-      value: summary.expense,
+      value: priceFormatter.format(summary.expense),
     },
     {
       title: 'Total',
       icon: <CurrencyDollar size={32} color="#fff" />,
-      value: summary.total,
+      value: priceFormatter.format(summary.total),
     },
   ]
 
