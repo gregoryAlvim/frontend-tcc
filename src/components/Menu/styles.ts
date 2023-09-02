@@ -34,7 +34,7 @@ export const TransactionsMenu = styled.nav`
 `
 
 interface TransactionsNavItemProps {
-  readonly variante: string
+  readonly variant: string
 }
 
 export const TransactionsNavItem = styled.li<TransactionsNavItemProps>`
@@ -44,7 +44,7 @@ export const TransactionsNavItem = styled.li<TransactionsNavItemProps>`
   font-size: 1.7rem;
 
   color: ${(props) =>
-    props.variante === 'true' ? props.theme['purple-300'] : props.theme.white};
+    props.variant === 'true' ? props.theme['purple-300'] : props.theme.white};
 
   &:hover {
     color: ${(props) => props.theme['purple-500']};

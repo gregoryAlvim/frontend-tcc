@@ -20,7 +20,7 @@ export function Menu({ initialIndexSelected }: MenuProps) {
       <Link to="/transactions">
         <S.TransactionsNavItem
           key={navItemKeys[0]}
-          variante={`${isSelected === navItemKeys[0]}`}
+          variant={`${isSelected === navItemKeys[0]}`}
           onClick={() => handleItemClick(navItemKeys[0])}
         >
           Transações
@@ -30,7 +30,7 @@ export function Menu({ initialIndexSelected }: MenuProps) {
       <Link to="/transactions/receitas">
         <S.TransactionsNavItem
           key={navItemKeys[1]}
-          variante={`${isSelected === navItemKeys[1]}`}
+          variant={`${isSelected === navItemKeys[1]}`}
           onClick={() => handleItemClick(navItemKeys[1])}
         >
           Receitas
@@ -40,7 +40,7 @@ export function Menu({ initialIndexSelected }: MenuProps) {
       <Link to="/transactions/despesas">
         <S.TransactionsNavItem
           key={navItemKeys[2]}
-          variante={`${isSelected === navItemKeys[2]}`}
+          variant={`${isSelected === navItemKeys[2]}`}
           onClick={() => handleItemClick(navItemKeys[2])}
         >
           Despesas
