@@ -5,6 +5,8 @@ import {
   ListBullets,
   PresentationChart,
   Target,
+  Note,
+  Gear,
 } from 'phosphor-react'
 import * as S from './styles'
 import { useState } from 'react'
@@ -40,10 +42,24 @@ export function Sidebar() {
         />
 
         <NavItem
+          title="Planejamentos"
+          redirectTo="plannings"
+          isMenuOpen={isOpen}
+          icon={<Note size={30} />}
+        />
+
+        <NavItem
           title="Objetivos"
           redirectTo="/objectives"
           isMenuOpen={isOpen}
           icon={<Target size={30} />}
+        />
+
+        <NavItem
+          title="Configurações"
+          redirectTo="configs"
+          isMenuOpen={isOpen}
+          icon={<Gear size={30} />}
         />
 
         <NavItem
