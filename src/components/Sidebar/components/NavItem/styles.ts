@@ -35,6 +35,12 @@ export const NavItemContainer = styled.ul`
   .selected {
     color: ${(props) => props.theme['purple-500']};
   }
+
+  &:last-child {
+    position: absolute;
+    left: 15px;
+    bottom: 20px;
+  }
 `
 interface NavLinkProps {
   variant?: string

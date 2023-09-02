@@ -6,12 +6,14 @@ interface DialogButtonProps {
   title: string
   icon: React.ReactNode
   type?: 'income' | 'expense'
+  action: React.ReactNode
 }
 
 export function DialogButton({
   title,
   icon,
   type = 'income',
+  action,
 }: DialogButtonProps) {
   return (
     <Dialog.Root>
@@ -22,7 +24,7 @@ export function DialogButton({
         </S.NewTransactionButton>
       </Dialog.Trigger>
 
-      <NewTransactionModal typeOfButton={type} />
+      {action}
     </Dialog.Root>
   )
 }

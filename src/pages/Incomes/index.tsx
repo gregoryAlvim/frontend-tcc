@@ -10,6 +10,7 @@ import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { Plus, Hourglass, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { DialogButton } from '../../components/DialogButton'
 import { priceFormatter } from '../../utils/formatter'
+import { NewTransactionModal } from '../../components/NewTransactionModal'
 
 export function Incomes() {
   const currentDate = new Date()
@@ -53,7 +54,11 @@ export function Incomes() {
       <S.IncomesHeader>
         <Menu initialIndexSelected={1} />
 
-        <DialogButton title="Nova receita" icon={<Plus />} />
+        <DialogButton
+          action={<NewTransactionModal typeOfButton="income" />}
+          title="Nova receita"
+          icon={<Plus />}
+        />
       </S.IncomesHeader>
       <Summary cards={cardsToSummary} />
       <DatePickerMenu
