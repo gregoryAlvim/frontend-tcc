@@ -11,6 +11,8 @@ import { ExpenseProvider } from '../contexts/expense/ExpenseProvider'
 import { CategoriesProvider } from '../contexts/categories/CategoriesProvider'
 import { TransactionsProvider } from '../contexts/transactions/TransactionsProvider'
 import { ObjectiveProvider } from '../contexts/objectives/ObjectiveProvider'
+import { Plannings } from '../pages/Plannings'
+import { Configs } from '../pages/Configs'
 
 export function AppRoutes() {
   return (
@@ -43,6 +45,8 @@ export function AppRoutes() {
               </ObjectiveProvider>
             }
           />
+          <Route path="/plannings" element={<Plannings />} />
+          <Route path="/configs" element={<Configs />} />
         </Route>
       </Routes>
     </Compose>
