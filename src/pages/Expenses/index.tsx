@@ -10,6 +10,7 @@ import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useExpensesSummary } from '../../hooks/useExpenseSummary'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
+import { NewTransactionModal } from '../../components/NewTransactionModal'
 
 export function Expenses() {
   const currentDate = new Date()
@@ -52,7 +53,12 @@ export function Expenses() {
       <S.ExpensesHeader>
         <Menu initialIndexSelected={2} />
 
-        <DialogButton type="expense" title="Nova despesa" icon={<Plus />} />
+        <DialogButton
+          action={<NewTransactionModal typeOfButton="expense" />}
+          type="expense"
+          title="Nova despesa"
+          icon={<Plus />}
+        />
       </S.ExpensesHeader>
 
       <Summary cards={cardsToSummary} />
