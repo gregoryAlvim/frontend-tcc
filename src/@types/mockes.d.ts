@@ -56,3 +56,9 @@ export interface Objective {
   initialValue: number
   isActivated: boolean
 }
+export interface Suggestion {
+  id?: string
+  name: string
+  amountParcels: number
+  valueOfParcels: number
+}
