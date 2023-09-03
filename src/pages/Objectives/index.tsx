@@ -3,11 +3,12 @@ import { Objective } from '../../@types/mockes'
 import { Summary } from '../../components/Summary'
 import * as Progress from '@radix-ui/react-progress'
 import { useContextSelector } from 'use-context-selector'
-import { CurrencyDollar, RocketLaunch, Target, X } from 'phosphor-react'
-import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
 import { useObjectivesSummary } from '../../hooks/useObjectivesSummary'
+import { CurrencyDollar, Plus, RocketLaunch, Target, X } from 'phosphor-react'
 import { dateStringFormatter, priceFormatter } from '../../utils/formatter'
-import { useState } from 'react'
+import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
+import { DialogButton } from '../../components/DialogButton'
+import { NewObjectiveModal } from './components/NewObjectiveModal'
 
 export function Objectives() {
   const summary = useObjectivesSummary()
@@ -71,6 +72,13 @@ export function Objectives() {
     <S.ObjectivesContainer>
       <S.ObjectivesHeader>
         <S.ObjectivesTitle>Objetivos</S.ObjectivesTitle>
+
+        <DialogButton
+          action={<NewObjectiveModal />}
+          icon={<Plus />}
+          type="income"
+          title="Novo objetivo"
+        ></DialogButton>
       </S.ObjectivesHeader>
 
       <Summary cards={cardsToSummary} />
