@@ -54,8 +54,14 @@ export interface Objective {
   createdAt?: string
   description: string
   initialValue: number
-  isActivated: boolean
+  isActivated?: boolean
 }
+
+export type ObjectivePreview = Pick<
+  Objective,
+  'date' | 'description' | 'initialValue' | 'goal'
+>
+
 export interface Suggestion {
   id?: string
   name: string

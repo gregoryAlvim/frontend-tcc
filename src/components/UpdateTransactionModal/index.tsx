@@ -12,6 +12,7 @@ import { Category, Expense, Income } from '../../@types/mockes'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
+import { simulateEscapeKey } from '../../utils/simulateEscapeKey'
 
 const updateTransactionFormSchema = z.object({
   id: z.string().optional(),
@@ -94,18 +95,6 @@ export function UpdateTransactionModal({
       isPayOrIsReceived: hasIsReceivedOrIsPay(data),
     },
   })
-
-  function simulateEscapeKey() {
-    const event = new KeyboardEvent('keydown', {
-      key: 'Escape',
-      keyCode: 27,
-      which: 27,
-      bubbles: true,
-      cancelable: true,
-    })
-
-    document.dispatchEvent(event)
-  }
 
   async function handleUpdateTransaction(data: UpdateTransactionFormInputs) {
     const {
