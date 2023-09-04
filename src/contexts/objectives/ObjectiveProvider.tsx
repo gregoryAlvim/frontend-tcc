@@ -4,6 +4,7 @@ import { ToastMessages } from '../../utils/ToastMessages'
 import { objectivesReducer } from '../../reducers/objectives/reducer'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 import { fetchObjectivesAction } from '../../reducers/objectives/actions'
+import { ObjectivePreview, Suggestion } from '../../@types/mockes'
 
 interface ObjectiveProviderProps {
   children: ReactNode
@@ -30,12 +31,28 @@ export function ObjectiveProvider({ children }: ObjectiveProviderProps) {
     }
   }, [])
 
+  async function createNewObjective(
+    preObjective: ObjectivePreview,
+    suggestion: Suggestion,
+  ) {
+    const response = await apiPrivate.post('objectives/create-objective', {
+      ...preObjective,
+      suggestion,
+    })
+
+    ToastMessages.showToastSuccess(response.data.message)
+
+    fetchObjectives()
+  }
+
   useEffect(() => {
     fetchObjectives()
   }, [fetchObjectives])
 
   return (
-    <ObjectiveContext.Provider value={{ objectives, fetchObjectives }}>
+    <ObjectiveContext.Provider
+      value={{ objectives, fetchObjectives, createNewObjective }}
+    >
       {children}
     </ObjectiveContext.Provider>
   )
