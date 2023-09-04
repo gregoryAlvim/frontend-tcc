@@ -4,16 +4,19 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { apiPrivate } from '../../../../lib/axios'
 import { dateInputFormatter } from '../../../../utils/formatter'
-import { Suggestion } from '../../../../@types/mockes'
+import { ObjectivePreview, Suggestion } from '../../../../@types/mockes'
 
 interface NewObjectiveFormOneProps {
   handleSuggestions: (data: Suggestion[]) => void
+  handlePreObjective: (data: ObjectivePreview) => void
 }
 
 export function NewObjectiveFormOne({
   handleSuggestions,
+  handlePreObjective,
 }: NewObjectiveFormOneProps) {
   const newObjectiveFormOneSchema = z.object({
+    description: z.string(),
     date: z.string(),
     goal: z.number(),
     initialValue: z.number(),
@@ -33,7 +36,7 @@ export function NewObjectiveFormOne({
   async function handleBuildObjectivesSuggestions(
     data: NewObjectiveFormOneInputs,
   ) {
-    const { date, goal, initialValue } = data
+    const { date, goal, initialValue, description } = data
 
     const formattedDate = dateInputFormatter(date)
 
@@ -43,12 +46,20 @@ export function NewObjectiveFormOne({
       date: formattedDate,
     })
 
+    handlePreObjective({ date: formattedDate, goal, initialValue, description })
     handleSuggestions(response.data.data)
   }
 
   return (
     <>
       <form onSubmit={handleSubmit(handleBuildObjectivesSuggestions)}>
+        <S.InputCard
+          type="text"
+          required
+          placeholder="Descrição"
+          {...register('description')}
+        />
+
         <S.InputCard type="date" required {...register('date')} />
 
         <S.InputCard
