@@ -1,29 +1,31 @@
+import {
+  Objective,
+  ObjectivePreview,
+  Suggestion,
+} from '../../../../@types/mockes'
 import * as S from './styles'
 import { useState } from 'react'
 import { X } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Suggestion } from '../../../../@types/mockes'
 import { NewObjectiveFormOne } from '../NewObjectiveFormOne'
-import { NewObjectiveFormThree } from '../NewObjectiveFormThree'
 import { NewObjectiveSelectSuggestion } from '../NewObjectiveSelectSuggestion'
 
 export function NewObjectiveModal() {
   const [currentStep, setCurrentStep] = useState<number>(1)
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
-  const [suggestion, setSuggestion] = useState({} as Suggestion)
+  const [objective, setObjective] = useState({} as ObjectivePreview)
 
-  function handleStepForm(step: number) {
+  function handleChangeStepForm(step: number) {
     setCurrentStep(step)
   }
 
   function handleSuggestionsDataFromFormOne(data: Suggestion[]) {
     setSuggestions(data)
-    handleStepForm(2)
+    handleChangeStepForm(2)
   }
 
-  function handleSelectSuggestionFromStepTwo(data: Suggestion) {
-    setSuggestion(data)
-    handleStepForm(3)
+  function handlePreObjectiveDataFromFormOne(data: ObjectivePreview) {
+    setObjective(data)
   }
 
   return (
@@ -35,16 +37,17 @@ export function NewObjectiveModal() {
 
         {currentStep === 1 && (
           <NewObjectiveFormOne
+            handlePreObjective={handlePreObjectiveDataFromFormOne}
             handleSuggestions={handleSuggestionsDataFromFormOne}
           />
         )}
         {currentStep === 2 && (
           <NewObjectiveSelectSuggestion
             data={suggestions}
-            handleSuggestion={handleSelectSuggestionFromStepTwo}
+            preObjective={objective}
           />
         )}
-        {currentStep === 2 && <NewObjectiveFormThree />}
+        {/* {currentStep === 3 && <NewObjectiveFormThree data={suggestion} />} */}
 
         <S.CloseButton>
           <X size={24} />
