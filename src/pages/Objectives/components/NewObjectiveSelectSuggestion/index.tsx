@@ -1,16 +1,28 @@
 import * as S from './styles.ts'
-import { Suggestion } from '../../../../@types/mockes'
+import { useContextSelector } from 'use-context-selector'
 import { priceFormatter } from '../../../../utils/formatter.ts'
+import { Suggestion, ObjectivePreview } from '../../../../@types/mockes'
+import { simulateEscapeKey } from '../../../../utils/simulateEscapeKey.ts'
+import { ObjectiveContext } from '../../../../contexts/objectives/ObjectiveContext.tsx'
 
 interface NewObjectiveSelectSuggestion {
   data: Suggestion[]
-  handleSuggestion: (data: Suggestion) => void
+  preObjective: ObjectivePreview
 }
 
 export function NewObjectiveSelectSuggestion({
   data,
-  handleSuggestion,
+  preObjective,
 }: NewObjectiveSelectSuggestion) {
+  const createNewObjective = useContextSelector(ObjectiveContext, (context) => {
+    return context.createNewObjective
+  })
+
+  function handleCreateTheObjective(suggestion: Suggestion) {
+    createNewObjective(preObjective, suggestion)
+    simulateEscapeKey()
+  }
+
   return (
     <S.SuggestionsContainer>
       <span>
@@ -25,7 +37,9 @@ export function NewObjectiveSelectSuggestion({
               <p>{`${suggestion.amountParcels} x ${priceFormatter.format(
                 suggestion.valueOfParcels,
               )}`}</p>
-              <S.ButtonSelectCard onClick={() => handleSuggestion(suggestion)}>
+              <S.ButtonSelectCard
+                onClick={() => handleCreateTheObjective(suggestion)}
+              >
                 Confirmar seleção
               </S.ButtonSelectCard>
             </S.SuggestionCard>
