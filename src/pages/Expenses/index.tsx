@@ -1,16 +1,16 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { Menu } from '../../components/Menu'
+import { Menu } from '../Transactions/components/Menu'
 import { Summary } from '../../components/Summary'
 import { priceFormatter } from '../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
-import { CustomTable } from '../../components/CustomTable'
+import { CustomTable } from '../Transactions/components/CustomTable'
 import { DialogButton } from '../../components/DialogButton'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useExpensesSummary } from '../../hooks/useExpenseSummary'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
-import { NewTransactionModal } from '../../components/NewTransactionModal'
+import { NewTransactionModal } from '../Transactions/components/NewTransactionModal'
 
 export function Expenses() {
   const currentDate = new Date()
