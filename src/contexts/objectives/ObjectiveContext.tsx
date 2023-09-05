@@ -8,8 +8,7 @@ interface ObjectiveContextType {
     preObjective: ObjectivePreview,
     suggestion: Suggestion,
   ) => void
-  // updateIncome: (data: Income) => void
-  // deleteIncome: (incomeId: string) => void
+  deleteObjective: (objectiveId: string) => void
 }
 
 export const ObjectiveContext = createContext({} as ObjectiveContextType)

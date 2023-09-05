@@ -1,10 +1,10 @@
 import * as S from './styles'
-import { Expense, Income } from '../../@types/mockes'
-import { priceFormatter } from '../../utils/formatter'
+import { Expense, Income } from '../../../../@types/mockes'
+import { priceFormatter } from '../../../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
 import { UpdateDialogButton } from '../UpdateDialogButton'
-import { IncomeContext } from '../../contexts/income/IncomeContext'
-import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
+import { IncomeContext } from '../../../../contexts/income/IncomeContext'
+import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
 import { CheckCircle, Hourglass, PencilSimple, X } from 'phosphor-react'
 
 interface CustomTableProps {

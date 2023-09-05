@@ -1,22 +1,30 @@
+import {
+  X,
+  Plus,
+  Target,
+  ListBullets,
+  RocketLaunch,
+  CurrencyDollar,
+} from 'phosphor-react'
 import * as S from './styles'
 import { Objective } from '../../@types/mockes'
 import { Summary } from '../../components/Summary'
 import * as Progress from '@radix-ui/react-progress'
 import { useContextSelector } from 'use-context-selector'
-import { useObjectivesSummary } from '../../hooks/useObjectivesSummary'
-import { CurrencyDollar, Plus, RocketLaunch, Target, X } from 'phosphor-react'
-import { dateStringFormatter, priceFormatter } from '../../utils/formatter'
-import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
 import { DialogButton } from '../../components/DialogButton'
 import { NewObjectiveModal } from './components/NewObjectiveModal'
+import { useObjectivesSummary } from '../../hooks/useObjectivesSummary'
+import { dateStringFormatter, priceFormatter } from '../../utils/formatter'
+import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
+import { ParcelsModal } from './components/ParcelsModal'
 
 export function Objectives() {
   const summary = useObjectivesSummary()
 
-  const objectives: Objective[] = useContextSelector(
+  const { objectives, deleteObjective } = useContextSelector(
     ObjectiveContext,
     (context) => {
-      return context.objectives
+      return context
     },
   )
 
@@ -37,6 +45,12 @@ export function Objectives() {
       value: priceFormatter.format(summary.previsto),
     },
   ]
+
+  function handleActionDeleteItem(itemId: string | undefined) {
+    if (itemId !== undefined) {
+      deleteObjective(itemId)
+    }
+  }
 
   function calculateTotalPaidAmount(objective: Objective) {
     const installmentsPaid = objective.parcels.filter(
@@ -115,9 +129,19 @@ export function Objectives() {
             </Progress.Root>
 
             <S.CardActions>
-              <S.deleteItemButton onClick={() => console.log('click')}>
+              <DialogButton
+                title=""
+                noBorder={true}
+                icon={<ListBullets />}
+                action={<ParcelsModal parcels={objective.parcels} />}
+              />
+
+              <S.ItemButton
+                className="deleteButton"
+                onClick={() => handleActionDeleteItem(objective.id)}
+              >
                 <X />
-              </S.deleteItemButton>
+              </S.ItemButton>
             </S.CardActions>
           </S.CardItem>
         ))}

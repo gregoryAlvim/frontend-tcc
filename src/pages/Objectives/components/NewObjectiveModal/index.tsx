@@ -1,13 +1,7 @@
-import {
-  Objective,
-  ObjectivePreview,
-  Suggestion,
-} from '../../../../@types/mockes'
-import * as S from './styles'
 import { useState } from 'react'
-import { X } from 'phosphor-react'
-import * as Dialog from '@radix-ui/react-dialog'
 import { NewObjectiveFormOne } from '../NewObjectiveFormOne'
+import { ModalScreen } from '../../../../components/ModalScreen'
+import { Suggestion, ObjectivePreview } from '../../../../@types/mockes'
 import { NewObjectiveSelectSuggestion } from '../NewObjectiveSelectSuggestion'
 
 export function NewObjectiveModal() {
@@ -29,30 +23,19 @@ export function NewObjectiveModal() {
   }
 
   return (
-    <Dialog.Portal>
-      <S.Overlay />
-
-      <S.Content>
-        <Dialog.Title>Novo objetivo</Dialog.Title>
-
-        {currentStep === 1 && (
-          <NewObjectiveFormOne
-            handlePreObjective={handlePreObjectiveDataFromFormOne}
-            handleSuggestions={handleSuggestionsDataFromFormOne}
-          />
-        )}
-        {currentStep === 2 && (
-          <NewObjectiveSelectSuggestion
-            data={suggestions}
-            preObjective={objective}
-          />
-        )}
-        {/* {currentStep === 3 && <NewObjectiveFormThree data={suggestion} />} */}
-
-        <S.CloseButton>
-          <X size={24} />
-        </S.CloseButton>
-      </S.Content>
-    </Dialog.Portal>
+    <ModalScreen title="Novo objetivo">
+      {currentStep === 1 && (
+        <NewObjectiveFormOne
+          handlePreObjective={handlePreObjectiveDataFromFormOne}
+          handleSuggestions={handleSuggestionsDataFromFormOne}
+        />
+      )}
+      {currentStep === 2 && (
+        <NewObjectiveSelectSuggestion
+          data={suggestions}
+          preObjective={objective}
+        />
+      )}
+    </ModalScreen>
   )
 }

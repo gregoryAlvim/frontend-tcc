@@ -1,21 +1,22 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { Menu } from '../../components/Menu'
+import { Menu } from '../Transactions/components/Menu'
 import { Summary } from '../../components/Summary'
 import { useContextSelector } from 'use-context-selector'
-import { CustomTable } from '../../components/CustomTable'
+import { CustomTable } from '../Transactions/components/CustomTable'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useIncomesSummary } from '../../hooks/useIncomesSummary'
 import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { Plus, Hourglass, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { DialogButton } from '../../components/DialogButton'
 import { priceFormatter } from '../../utils/formatter'
-import { NewTransactionModal } from '../../components/NewTransactionModal'
+import { NewTransactionModal } from '../Transactions/components/NewTransactionModal'
 
 export function Incomes() {
   const currentDate = new Date()
   const summary = useIncomesSummary()
   const [selectedDate, setSelectedDate] = useState(currentDate)
+
   const { incomes, fetchIncomes } = useContextSelector(
     IncomeContext,
     (context) => {

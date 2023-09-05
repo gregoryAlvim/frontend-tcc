@@ -46,6 +46,10 @@ export const CardItem = styled.div`
     border-radius: 6px;
     transform: translateZ(0);
     background: ${(props) => props.theme['gray-100']};
+
+    span {
+      font-size: 1.2rem;
+    }
   }
 
   .ProgressIndicator {
@@ -89,20 +93,35 @@ export const CardStrong = styled.strong`
 `
 
 export const CardActions = styled.div`
+  gap: 1rem;
   display: flex;
+  grid-area: 'options';
   align-items: flex-start;
   justify-content: flex-end;
-  grid-area: 'options';
+
+  .deleteButton {
+    color: ${(props) => props.theme['red-300']};
+
+    &:hover {
+      color: ${(props) => props.theme['red-700']};
+    }
+  }
+
+  .parcelsButton {
+    color: ${(props) => props.theme['purple-300']};
+
+    &:hover {
+      color: ${(props) => props.theme['purple-500']};
+    }
+  }
 `
 
-export const deleteItemButton = styled.button`
-  background-color: transparent;
+export const ItemButton = styled.button`
   border: none;
-  color: ${(props) => props.theme['red-300']};
   cursor: pointer;
+  background-color: transparent;
 
   &:hover {
-    color: ${(props) => props.theme['red-700']};
     transition: all 0.3s;
   }
 `

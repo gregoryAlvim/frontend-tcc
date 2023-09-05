@@ -40,7 +40,7 @@ export interface Income {
 export interface Parcel {
   id?: string
   value: number
-  month: string
+  month: MonthEnum
   portion: number
   createdAt?: Date
   isPaid?: boolean

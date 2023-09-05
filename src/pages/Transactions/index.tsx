@@ -1,11 +1,10 @@
 import * as S from './styles'
-import { useState } from 'react'
-import { Summary } from '../../components/Summary'
+
 import { useContextSelector } from 'use-context-selector'
 import { SearchForm } from './components/SearchForm/Index'
 import { dateFormatter, priceFormatter } from '../../utils/formatter'
 import { TransactionsContext } from '../../contexts/transactions/TransactionsContext'
-import { Menu } from '../../components/Menu'
+import { Menu } from './components/Menu'
 
 export function Transactions() {
   const transactions = useContextSelector(TransactionsContext, (context) => {

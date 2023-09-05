@@ -2,11 +2,11 @@ import axios from 'axios'
 import { useRefreshAccessToken } from '../hooks/useRefreshAccessToken'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3001',
 })
 
 export const apiPrivate = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3001',
   headers: { 'Content-Type': 'application/json' },
 })
 

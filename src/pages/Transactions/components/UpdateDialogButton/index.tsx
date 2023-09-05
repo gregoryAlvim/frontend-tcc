@@ -1,7 +1,7 @@
 import * as S from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 import { UpdateTransactionModal } from '../UpdateTransactionModal'
-import { Income, Expense } from '../../@types/mockes'
+import { Income, Expense } from '../../../../@types/mockes'
 
 interface DialogButtonProps {
   icon: React.ReactNode
