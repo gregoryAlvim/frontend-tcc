@@ -1,9 +1,12 @@
+import {
+  deleteObjectiveAction,
+  fetchObjectivesAction,
+} from '../../reducers/objectives/actions'
 import { apiPrivate } from '../../lib/axios'
 import { ObjectiveContext } from './ObjectiveContext'
 import { ToastMessages } from '../../utils/ToastMessages'
 import { objectivesReducer } from '../../reducers/objectives/reducer'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
-import { fetchObjectivesAction } from '../../reducers/objectives/actions'
 import { ObjectivePreview, Suggestion } from '../../@types/mockes'
 
 interface ObjectiveProviderProps {
@@ -45,13 +48,28 @@ export function ObjectiveProvider({ children }: ObjectiveProviderProps) {
     fetchObjectives()
   }
 
+  async function deleteObjective(objectiveId: string) {
+    const response = await apiPrivate.delete(
+      `/objectives/delete-objective-by/${objectiveId}`,
+    )
+
+    dispatch(deleteObjectiveAction(objectiveId))
+
+    ToastMessages.showToastSuccess(response.data.message)
+  }
+
   useEffect(() => {
     fetchObjectives()
   }, [fetchObjectives])
 
   return (
     <ObjectiveContext.Provider
-      value={{ objectives, fetchObjectives, createNewObjective }}
+      value={{
+        objectives,
+        fetchObjectives,
+        createNewObjective,
+        deleteObjective,
+      }}
     >
       {children}
     </ObjectiveContext.Provider>
