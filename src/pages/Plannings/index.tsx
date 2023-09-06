@@ -1,3 +1,11 @@
+import * as S from './styles'
+
 export function Plannings() {
-  return <h1>Planejamentos</h1>
+  return (
+    <S.PlanningsContainer>
+      <S.PlanningsHeader>
+        <S.PlanningsTitle>Planejamentos</S.PlanningsTitle>
+      </S.PlanningsHeader>
+    </S.PlanningsContainer>
+  )
 }

@@ -8,11 +8,13 @@ import { ObjectiveContext } from '../../../../contexts/objectives/ObjectiveConte
 interface NewObjectiveSelectSuggestion {
   data: Suggestion[]
   preObjective: ObjectivePreview
+  changeStepForm: (step: number) => void
 }
 
 export function NewObjectiveSelectSuggestion({
   data,
   preObjective,
+  changeStepForm,
 }: NewObjectiveSelectSuggestion) {
   const createNewObjective = useContextSelector(ObjectiveContext, (context) => {
     return context.createNewObjective
@@ -21,6 +23,7 @@ export function NewObjectiveSelectSuggestion({
   function handleCreateTheObjective(suggestion: Suggestion) {
     createNewObjective(preObjective, suggestion)
     simulateEscapeKey()
+    changeStepForm(1)
   }
 
   return (

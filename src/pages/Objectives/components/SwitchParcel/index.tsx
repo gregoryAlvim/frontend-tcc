@@ -1,25 +1,52 @@
 import * as S from './styles'
 import { CheckCircle } from 'phosphor-react'
 import * as Switch from '@radix-ui/react-switch'
-import { useState } from 'react'
+import { apiPrivate } from '../../../../lib/axios'
+import { ToastMessages } from '../../../../utils/ToastMessages'
+import { ObjectiveContext } from '../../../../contexts/objectives/ObjectiveContext'
+import { useContextSelector } from 'use-context-selector'
 
 interface SwitchParcelProps {
   parcelId: string | undefined
+  isPaid: boolean | undefined
 }
 
-export function SwitchParcel({ parcelId }: SwitchParcelProps) {
-  const [value, setValue] = useState<boolean>(false)
+export function SwitchParcel({ parcelId, isPaid }: SwitchParcelProps) {
+  const fetchObjectives = useContextSelector(ObjectiveContext, (context) => {
+    return context.fetchObjectives
+  })
 
-  function updateCheckedParcel(parcelId: string, checked: boolean) {}
-
-  function handleCheckedChange(checked: boolean) {
-    setValue(checked)
+  async function updateCheckedParcel(
+    parcelId: string | undefined,
+    checked: boolean,
+  ) {
+    if (parcelId !== undefined) {
+      try {
+        const response = await apiPrivate.patch(
+          `parcels/update-parcel-by/${parcelId}`,
+          {
+            isPaid: checked,
+          },
+        )
+        fetchObjectives()
+        ToastMessages.showToastSuccess(response.data.message)
+      } catch (error: any) {
+        if (error.response.status) {
+          ToastMessages.showToastError(error.response.data.message)
+        } else {
+          ToastMessages.showToastError('Algo deu errado, tente novamente!')
+        }
+      }
+    }
   }
 
   return (
     <S.SwitchContainer>
       <Switch.Root
-        onCheckedChange={(checked: boolean) => handleCheckedChange(checked)}
+        checked={isPaid}
+        onCheckedChange={(checked: boolean) =>
+          updateCheckedParcel(parcelId, checked)
+        }
         className="SwitchRoot"
       >
         <Switch.Thumb className="SwitchThumb" asChild>

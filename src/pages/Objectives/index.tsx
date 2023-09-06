@@ -62,7 +62,7 @@ export function Objectives() {
       0,
     )
 
-    return totalPaidAmount
+    return totalPaidAmount + objective.initialValue
   }
 
   function calculateTargetPercentage(objective: Objective) {
@@ -76,7 +76,10 @@ export function Objectives() {
     )
 
     const targetPercentage = Number(
-      ((totalPaidAmount / objective.goal) * 100).toFixed(0),
+      (
+        ((totalPaidAmount + objective.initialValue) / objective.goal) *
+        100
+      ).toFixed(0),
     )
 
     return targetPercentage

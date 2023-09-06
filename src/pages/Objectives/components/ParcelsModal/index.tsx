@@ -43,7 +43,7 @@ export function ParcelsModal({ parcels }: ParcelsModalProps) {
                   <span>{getPortugueseMonth(parcel.month)}</span>
                 </td>
                 <td>
-                  <SwitchParcel parcelId={parcel.id} />
+                  <SwitchParcel isPaid={parcel.isPaid} parcelId={parcel.id} />
                 </td>
               </tr>
             ))}

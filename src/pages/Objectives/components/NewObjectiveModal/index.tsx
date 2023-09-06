@@ -34,6 +34,7 @@ export function NewObjectiveModal() {
         <NewObjectiveSelectSuggestion
           data={suggestions}
           preObjective={objective}
+          changeStepForm={handleChangeStepForm}
         />
       )}
     </ModalScreen>
