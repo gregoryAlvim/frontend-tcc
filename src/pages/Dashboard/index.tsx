@@ -21,7 +21,7 @@ export function Dashboard() {
     },
     {
       title: 'Total',
-      icon: <CurrencyDollar size={32} color="#fff" />,
+      icon: <CurrencyDollar size={32} color="#00b37e" />,
       value: priceFormatter.format(summary.total),
     },
   ]

@@ -1,15 +1,20 @@
+import {
+  Plus,
+  ArrowCircleUp,
+  CurrencyDollar,
+  ArrowCircleDown,
+} from 'phosphor-react'
 import * as S from './styles'
 import { useState } from 'react'
-import { Menu } from '../Transactions/components/Menu'
 import { Summary } from '../../components/Summary'
+import { Menu } from '../Transactions/components/Menu'
 import { priceFormatter } from '../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
-import { CustomTable } from '../Transactions/components/CustomTable'
 import { DialogButton } from '../../components/DialogButton'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
 import { useExpensesSummary } from '../../hooks/useExpenseSummary'
+import { CustomTable } from '../Transactions/components/CustomTable'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
-import { ArrowCircleUp, CurrencyDollar, Hourglass, Plus } from 'phosphor-react'
 import { NewTransactionModal } from '../Transactions/components/NewTransactionModal'
 
 export function Expenses() {
@@ -25,17 +30,17 @@ export function Expenses() {
   const cardsToSummary = [
     {
       title: 'Pendentes',
-      icon: <Hourglass size={32} color="#F75A68" />,
+      icon: <ArrowCircleUp size={32} color="#F75A68" />,
       value: priceFormatter.format(summary.pendentes),
     },
     {
       title: 'Pagas',
-      icon: <ArrowCircleUp size={32} color="#00b37e" />,
+      icon: <ArrowCircleDown size={32} color="#F75A68" />,
       value: priceFormatter.format(summary.pagas),
     },
     {
       title: 'Previsto',
-      icon: <CurrencyDollar size={32} color="#fff" />,
+      icon: <CurrencyDollar size={32} color="#F75A68" />,
       value: priceFormatter.format(summary.previsto),
     },
   ]
