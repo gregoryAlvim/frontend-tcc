@@ -5,7 +5,13 @@ import { useContextSelector } from 'use-context-selector'
 import { UpdateDialogButton } from '../UpdateDialogButton'
 import { IncomeContext } from '../../../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
-import { CheckCircle, Hourglass, PencilSimple, X } from 'phosphor-react'
+import {
+  CheckCircle,
+  Hourglass,
+  PencilSimple,
+  WarningCircle,
+  X,
+} from 'phosphor-react'
 
 interface CustomTableProps {
   data: (Income | Expense)[]
@@ -66,7 +72,7 @@ export function CustomTable({ data, type }: CustomTableProps) {
               {hasIsReceivedOrIsPay(item) ? (
                 <CheckCircle size={18} color="#00B37E" />
               ) : (
-                <Hourglass size={18} color="#F75A68" />
+                <WarningCircle size={18} color="#F75A68" />
               )}
             </td>
             <td>{item.description}</td>

@@ -68,3 +68,18 @@ export interface Suggestion {
   amountParcels: number
   valueOfParcels: number
 }
+
+export interface PlanningByCategory {
+  id?: string
+  goal: number
+  category: Category
+  createdAt?: string
+}
+
+export interface Planning {
+  id?: string
+  goal: number
+  month: string
+  planningsByCategory: PlanningByCategory[]
+  createdAt?: string
+}
