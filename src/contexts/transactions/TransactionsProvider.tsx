@@ -1,7 +1,4 @@
-import {
-  TransactionsContext,
-  CreateTransactionInput,
-} from './TransactionsContext'
+import { TransactionsContext } from './TransactionsContext'
 import { apiPrivate } from '../../lib/axios'
 import { Income, Expense } from '../../@types/mockes'
 import { ReactNode, useState, useCallback, useEffect } from 'react'
@@ -36,31 +33,12 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     [],
   )
 
-  const createTransaction = useCallback(
-    async (data: CreateTransactionInput) => {
-      const { description, category, price, type } = data
-
-      // const response = await api.post('transactions', {
-      //   description,
-      //   category,
-      //   price,
-      //   type,
-      //   createdAt: new Date(),
-      // })
-
-      // setTransactions((state) => [response.data, ...state])
-    },
-    [],
-  )
-
   useEffect(() => {
     fetchTransactions()
   }, [fetchTransactions])
 
   return (
-    <TransactionsContext.Provider
-      value={{ transactions, fetchTransactions, createTransaction }}
-    >
+    <TransactionsContext.Provider value={{ transactions, fetchTransactions }}>
       {children}
     </TransactionsContext.Provider>
   )

@@ -13,6 +13,7 @@ import { useContextSelector } from 'use-context-selector'
 import { Planning } from '../../@types/mockes'
 import { NoPlanningOfMonth } from './components/NoPlanningOfMonth'
 import { priceFormatter } from '../../utils/formatter'
+import { PlanningOfMonth } from './components/PlanningOfMonth'
 
 export function Plannings() {
   const currentDate = new Date()
@@ -59,7 +60,7 @@ export function Plannings() {
   return (
     <S.PlanningsContainer>
       <S.PlanningsHeader>
-        <S.PlanningsTitle>Planejamentos</S.PlanningsTitle>
+        <S.PlanningsTitle>Planejamento Mensal</S.PlanningsTitle>
       </S.PlanningsHeader>
 
       <Summary cards={cardsToSummary} />
@@ -69,7 +70,11 @@ export function Plannings() {
         handleDateChange={handleDateChange}
       />
       <S.PlanningsContent>
-        {currentPlanning ? '' : <NoPlanningOfMonth />}
+        {currentPlanning ? (
+          <PlanningOfMonth data={currentPlanning} />
+        ) : (
+          <NoPlanningOfMonth />
+        )}
       </S.PlanningsContent>
     </S.PlanningsContainer>
   )
