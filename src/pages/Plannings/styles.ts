@@ -18,7 +18,6 @@ export const PlanningsHeader = styled.header`
 
 export const PlanningsContent = styled.div`
   margin-top: 1rem;
-  background: ${(props) => props.theme['gray-700']};
 `
 
 export const PlanningsTitle = styled.h1`
