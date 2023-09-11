@@ -5,8 +5,8 @@ import {
   ListBullets,
   PresentationChart,
   Target,
-  Note,
   Gear,
+  Flag,
 } from 'phosphor-react'
 import * as S from './styles'
 import { useState } from 'react'
@@ -45,7 +45,7 @@ export function Sidebar() {
           title="Planejamentos"
           redirectTo="plannings"
           isMenuOpen={isOpen}
-          icon={<Note size={30} />}
+          icon={<Flag size={30} />}
         />
 
         <NavItem
