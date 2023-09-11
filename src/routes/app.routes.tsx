@@ -50,7 +50,11 @@ export function AppRoutes() {
             path="/plannings"
             element={
               <PlanningProvider>
-                <Plannings />
+                <IncomeProvider>
+                  <ExpenseProvider>
+                    <Plannings />
+                  </ExpenseProvider>
+                </IncomeProvider>
               </PlanningProvider>
             }
           />
