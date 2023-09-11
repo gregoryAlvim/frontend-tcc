@@ -1,7 +1,7 @@
-import { DialogButton } from '../../../../components/DialogButton'
-import { NewTransactionModal } from '../../../Transactions/components/NewTransactionModal'
 import * as S from './styles'
 import { Flag, Plus } from 'phosphor-react'
+import { NewPlanningModal } from '../NewPlanningModal'
+import { DialogButton } from '../../../../components/DialogButton'
 
 export function NoPlanningOfMonth() {
   return (
@@ -9,7 +9,7 @@ export function NoPlanningOfMonth() {
       <Flag size={80} />
       <span>Nenhum orçamento definido para este mês</span>
       <DialogButton
-        action={<NewTransactionModal typeOfButton="income" />}
+        action={<NewPlanningModal />}
         icon={<Plus />}
         title="DEFINIR NOVO PLANEJAMENTO"
       />
