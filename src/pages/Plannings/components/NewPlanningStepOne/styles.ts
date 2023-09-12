@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const FormStepOne = styled.form`
   span {
-    font-size: 1.3rem;
-    margin-bottom: 4rem;
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
   }
 `
 
@@ -13,6 +13,6 @@ export const InputContainer = styled.div`
   gap: 1rem;
 
   label {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 `
