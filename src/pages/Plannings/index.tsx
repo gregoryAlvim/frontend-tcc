@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Planning } from '../../@types/mockes'
 import { Summary } from '../../components/Summary'
 import { priceFormatter } from '../../utils/formatter'
@@ -13,6 +13,7 @@ import { ArrowCircleDown, ArrowCircleUp, RocketLaunch } from 'phosphor-react'
 
 export function Plannings() {
   const currentDate = new Date()
+  const currentMonth = (currentDate.getMonth() + 1).toString()
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const [currentPlanning, setCurrentPlanning] = useState<Planning | null>(null)
 
@@ -63,6 +64,10 @@ export function Plannings() {
     filterPlanningByMonth(month)
     dataToSummary.fetchTransactions(month, year)
   }
+
+  useEffect(() => {
+    filterPlanningByMonth(currentMonth)
+  })
 
   return (
     <S.PlanningsContainer>
