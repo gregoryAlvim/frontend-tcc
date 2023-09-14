@@ -7,8 +7,16 @@ export const FormStepThree = styled.form`
   }
 `
 
+export const TotalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`
+
 export const CategoryCard = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `
