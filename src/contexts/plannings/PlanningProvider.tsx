@@ -1,9 +1,14 @@
 import { apiPrivate } from '../../lib/axios'
-import { PlanningContext } from './PlanningContext'
+import {
+  PlanningContext,
+  PlanningProps,
+  PlanningsByCategoryProps,
+} from './PlanningContext'
 import { ToastMessages } from '../../utils/ToastMessages'
 import { planningsReducer } from '../../reducers/plannings/reducer'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 import { fetchPlanningsAction } from '../../reducers/plannings/action'
+import { Planning } from '../../@types/mockes'
 
 interface PlanningProviderProps {
   children: ReactNode
@@ -30,12 +35,28 @@ export function PlanningProvider({ children }: PlanningProviderProps) {
     }
   }, [])
 
+  async function createNewPlanning(
+    planning: PlanningProps,
+    planningsByCategory: PlanningsByCategoryProps[],
+  ) {
+    const response = await apiPrivate.post('plannings/create-planning', {
+      ...planning,
+      planningsByCategory,
+    })
+
+    ToastMessages.showToastSuccess(response.data.message)
+
+    fetchPlannings()
+  }
+
   useEffect(() => {
     fetchPlannings()
   }, [fetchPlannings])
 
   return (
-    <PlanningContext.Provider value={{ plannings, fetchPlannings }}>
+    <PlanningContext.Provider
+      value={{ plannings, fetchPlannings, createNewPlanning }}
+    >
       {children}
     </PlanningContext.Provider>
   )
