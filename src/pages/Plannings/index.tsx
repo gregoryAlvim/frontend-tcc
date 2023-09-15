@@ -13,9 +13,9 @@ import { ArrowCircleDown, ArrowCircleUp, RocketLaunch } from 'phosphor-react'
 
 export function Plannings() {
   const currentDate = new Date()
-  const currentMonth = (currentDate.getMonth() + 1).toString()
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const [currentPlanning, setCurrentPlanning] = useState<Planning | null>(null)
+  const selectedMonth = (selectedDate.getMonth() + 1).toString()
 
   const plannings = useContextSelector(PlanningContext, (context) => {
     return context.plannings
@@ -52,6 +52,10 @@ export function Plannings() {
   function filterPlanningByMonth(month: string) {
     const result = plannings.filter((planning) => planning.month === month)
 
+    if (result.length === 0) {
+      setCurrentPlanning(null)
+    }
+
     setCurrentPlanning(result[0])
   }
 
@@ -66,7 +70,7 @@ export function Plannings() {
   }
 
   useEffect(() => {
-    filterPlanningByMonth(currentMonth)
+    filterPlanningByMonth(selectedMonth)
   })
 
   return (
