@@ -36,9 +36,7 @@ export function NewPlanningStepThree({
   type NewPlanningStepThreeInputs = z.infer<typeof newPlanningStepThreeSchema>
 
   const {
-    control,
     register,
-    setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<NewPlanningStepThreeInputs>({
@@ -61,7 +59,7 @@ export function NewPlanningStepThree({
 
   return (
     <S.FormStepThree onSubmit={handleSubmit(handleGoalsToCategories)}>
-      <strong>Planejamento por categorias</strong>
+      <strong>Terceiro passo</strong>
       <span>
         Está na hora de definir suas metas. Atribua o valor que desejar a cada
         categoria selecionada.
@@ -69,7 +67,9 @@ export function NewPlanningStepThree({
 
       <S.TotalContainer>
         <p>Total</p>
-        <p>{priceFormatter.format(totalMonthlyRevenue)}</p>
+        <strong className="TotalMonthlyRevenue">
+          {priceFormatter.format(totalMonthlyRevenue)}
+        </strong>
       </S.TotalContainer>
 
       {categories.map((category, index) => (
@@ -91,7 +91,9 @@ export function NewPlanningStepThree({
         </S.CategoryCard>
       ))}
 
-      <button type="submit">Salvar Planejamento</button>
+      <button type="submit" disabled={isSubmitting}>
+        Salvar Planejamento
+      </button>
     </S.FormStepThree>
   )
 }
