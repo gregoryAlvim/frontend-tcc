@@ -12,6 +12,7 @@ import {
   WarningCircle,
   X,
 } from 'phosphor-react'
+import { DeleteButton } from '../../../../components/DeleteButton/indext'
 
 interface CustomTableProps {
   data: (Income | Expense)[]
@@ -94,11 +95,9 @@ export function CustomTable({ data, type }: CustomTableProps) {
                 />
               }
               {
-                <S.deleteItemButton
-                  onClick={() => handleActionDeleteItem(item?.id)}
-                >
-                  <X />
-                </S.deleteItemButton>
+                <DeleteButton
+                  actionOnClick={() => handleActionDeleteItem(item?.id)}
+                />
               }
             </td>
           </tr>
