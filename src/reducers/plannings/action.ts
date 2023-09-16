@@ -2,7 +2,7 @@ import { Planning } from '../../@types/mockes'
 
 export enum ActionTypesToPlanning {
   FETCH_PLANNINGS = 'FETCH_PLANNINGS',
-  DELETE_PLANNING = 'DELETE_PLANNING',
+  DELETE_PLANNING_CATEGORY_BY_ID = 'DELETE_PLANNING',
 }
 
 export function fetchPlanningsAction(plannings: Planning[]) {
@@ -14,11 +14,15 @@ export function fetchPlanningsAction(plannings: Planning[]) {
   }
 }
 
-export function deletePlanningAction(planningId: string) {
+export function deletePlanningCategoryAction(
+  planningId: string,
+  planningCategoryIdToRemove: string,
+) {
   return {
-    type: ActionTypesToPlanning.DELETE_PLANNING,
+    type: ActionTypesToPlanning.DELETE_PLANNING_CATEGORY_BY_ID,
     payload: {
       planningId,
+      planningCategoryIdToRemove,
     },
   }
 }
