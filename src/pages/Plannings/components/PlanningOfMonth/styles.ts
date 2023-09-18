@@ -25,5 +25,10 @@ export const PlanningOfMonthContainer = styled.article`
         font-size: 1.4rem;
       }
     }
+
+    .actionsToItemsTable {
+      display: flex;
+      gap: 1rem;
+    }
   }
 `
