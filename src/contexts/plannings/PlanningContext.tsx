@@ -22,7 +22,10 @@ interface PlanningContextType {
     planningId: string,
     planningCategoryIdToRemove: string,
   ) => void
-  updatePlanningByCategory: (data: PlanningsByCategoryProps) => void
+  updatePlanningByCategory: (
+    subPlanningId: string,
+    data: PlanningsByCategoryProps,
+  ) => void
 }
 
 export const PlanningContext = createContext({} as PlanningContextType)

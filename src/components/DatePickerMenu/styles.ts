@@ -14,6 +14,7 @@ export const MenuTable = styled.div`
 
   .custom-datepicker {
     /* Estilize o componente como desejar */
+    cursor: pointer;
     width: 15rem;
     border: 1px solid ${(props) => props.theme['purple-500']};
     color: ${(props) => props.theme['gray-300']};

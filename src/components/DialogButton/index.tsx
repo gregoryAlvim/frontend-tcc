@@ -2,7 +2,7 @@ import * as S from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 
 interface DialogButtonProps {
-  title: string
+  title?: string
   icon: React.ReactNode
   type?: 'income' | 'expense'
   action: React.ReactNode

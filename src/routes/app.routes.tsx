@@ -20,7 +20,14 @@ export function AppRoutes() {
     <Compose components={[TransactionsProvider, CategoriesProvider]}>
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            path="/"
+            element={
+              <PlanningProvider>
+                <Dashboard />
+              </PlanningProvider>
+            }
+          />
           <Route path="/transactions" element={<Transactions />} />
           <Route
             path="/transactions/receitas"

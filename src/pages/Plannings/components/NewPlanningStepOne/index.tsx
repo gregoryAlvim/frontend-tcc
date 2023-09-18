@@ -2,6 +2,7 @@ import * as z from 'zod'
 import * as S from './styles'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 interface NewPlanningStepOneProps {
   handleSetDataStepOne: (totalMonthlyRevenue: number) => void
@@ -44,9 +45,11 @@ export function NewPlanningStepOne({
           {...register('totalMonthlyRevenue', { valueAsNumber: true })}
         />
 
-        <button type="submit" disabled={isSubmitting}>
-          Continuar
-        </button>
+        <DefaultButton
+          type="submit"
+          title="Continuar"
+          disabled={isSubmitting}
+        />
       </S.InputContainer>
     </S.FormStepOne>
   )

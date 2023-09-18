@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useContextSelector } from 'use-context-selector'
 import { CategoriesContext } from '../../../../contexts/categories/CategoriesContext'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 interface NewPlanningStepTwoProps {
   handleSetDataStepTwo: (data: Category[]) => void
@@ -137,9 +138,7 @@ export function NewPlanningStepTwo({
         />
       </S.SelectContainer>
 
-      <button type="submit" disabled={isSubmitting}>
-        Continuar
-      </button>
+      <DefaultButton type="submit" title="Continuar" disabled={isSubmitting} />
     </S.FormStepTwo>
   )
 }

@@ -1,8 +1,14 @@
 import * as S from './styles'
+import { PencilSimple } from 'phosphor-react'
 import { Planning } from '../../../../@types/mockes'
-import { priceFormatter } from '../../../../utils/formatter'
-import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
 import { useContextSelector } from 'use-context-selector'
+import { priceFormatter } from '../../../../utils/formatter'
+import { DialogButton } from '../../../../components/DialogButton'
+import { DeleteButton } from '../../../../components/DeleteButton/indext'
+import { UpdatePlanningCategoryModal } from '../UpdatePlanningCategoryModal'
+import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
+import { PlanningContext } from '../../../../contexts/plannings/PlanningContext'
+import { UpdateDialogButton } from '../../../Transactions/components/UpdateDialogButton'
 
 interface PlanningOfMonthProps {
   data: Planning
@@ -12,6 +18,22 @@ export function PlanningOfMonth({ data }: PlanningOfMonthProps) {
   const expenses = useContextSelector(ExpenseContext, (context) => {
     return context.expenses
   })
+
+  const deletePlanningCategory = useContextSelector(
+    PlanningContext,
+    (context) => {
+      return context.deletePlanningCategory
+    },
+  )
+
+  function handleActionDeleteItem(
+    planningId: string | undefined,
+    planningCategoryIdToRemove: string | undefined,
+  ) {
+    if (planningId !== undefined && planningCategoryIdToRemove !== undefined) {
+      deletePlanningCategory(planningId, planningCategoryIdToRemove)
+    }
+  }
 
   function filterExpenseByCategory(category: string) {
     const expensesByCategory = expenses.filter(
@@ -87,7 +109,20 @@ export function PlanningOfMonth({ data }: PlanningOfMonthProps) {
                       .total,
                 )}
               </td>
-              <td></td>
+              <td className="actionsToItemsTable">
+                <DialogButton
+                  noBorder
+                  icon={<PencilSimple />}
+                  action={
+                    <UpdatePlanningCategoryModal data={planningByCategory} />
+                  }
+                />
+                <DeleteButton
+                  actionOnClick={() =>
+                    handleActionDeleteItem(data.id, planningByCategory.id)
+                  }
+                />
+              </td>
             </tr>
           ))}
         </tbody>

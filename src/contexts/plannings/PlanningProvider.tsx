@@ -54,9 +54,13 @@ export function PlanningProvider({ children }: PlanningProviderProps) {
     fetchPlannings()
   }
 
-  async function updatePlanningByCategory(data: PlanningsByCategoryProps) {
+  async function updatePlanningByCategory(
+    subPlanningId: string,
+    data: PlanningsByCategoryProps,
+  ) {
+    console.log(data)
     const response = await apiPrivate.patch(
-      `plannings-by-category/update-planning-by-category-by/${data.category_uuid}`,
+      `plannings-by-category/update-planning-by-category-by/${subPlanningId}`,
       {
         goal: data.goal,
         category_uuid: data.category_uuid,
@@ -64,6 +68,8 @@ export function PlanningProvider({ children }: PlanningProviderProps) {
     )
 
     ToastMessages.showToastSuccess(response.data.message)
+
+    fetchPlannings()
   }
 
   async function deletePlanningCategory(

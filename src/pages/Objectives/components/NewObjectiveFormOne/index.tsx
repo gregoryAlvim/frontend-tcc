@@ -52,7 +52,9 @@ export function NewObjectiveFormOne({
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleBuildObjectivesSuggestions)}>
+      <S.FormContainer
+        onSubmit={handleSubmit(handleBuildObjectivesSuggestions)}
+      >
         <S.InputCard
           type="text"
           required
@@ -79,7 +81,7 @@ export function NewObjectiveFormOne({
         <button type="submit" disabled={isSubmitting}>
           Gerar opções
         </button>
-      </form>
+      </S.FormContainer>
     </>
   )
 }

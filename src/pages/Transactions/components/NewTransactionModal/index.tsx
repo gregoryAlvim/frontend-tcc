@@ -13,6 +13,7 @@ import { ArrowCircleDown, ArrowCircleUp, CheckCircle, X } from 'phosphor-react'
 import { CategoriesContext } from '../../../../contexts/categories/CategoriesContext'
 import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
 import { ModalScreen } from '../../../../components/ModalScreen'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -136,7 +137,7 @@ export function NewTransactionModal({
 
   return (
     <ModalScreen title="Nova transação">
-      <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
+      <S.FormContainer onSubmit={handleSubmit(handleCreateNewTransaction)}>
         <Controller
           control={control}
           name="type"
@@ -264,10 +265,12 @@ export function NewTransactionModal({
           name="isPayOrIsReceived"
         />
 
-        <button type="submit" disabled={isSubmitting}>
-          Cadastrar
-        </button>
-      </form>
+        <DefaultButton
+          type="submit"
+          title="Cadastrar"
+          disabled={isSubmitting}
+        />
+      </S.FormContainer>
     </ModalScreen>
   )
 }

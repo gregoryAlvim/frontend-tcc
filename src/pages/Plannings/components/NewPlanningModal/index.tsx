@@ -15,6 +15,10 @@ export function NewPlanningModal() {
     setCurrentStep(step)
   }
 
+  function resetStepForm() {
+    handleChangeStepForm(1)
+  }
+
   function handleDataFromStepOneForm(totalMonthlyRevenue: number) {
     setDataStepOne(totalMonthlyRevenue)
     handleChangeStepForm(2)
@@ -26,7 +30,7 @@ export function NewPlanningModal() {
   }
 
   return (
-    <ModalScreen title="Planejamento do mês">
+    <ModalScreen title="Planejamento do mês" actionToClosed={resetStepForm}>
       <ModalContent>
         {currentStep === 1 && (
           <NewPlanningStepOne
