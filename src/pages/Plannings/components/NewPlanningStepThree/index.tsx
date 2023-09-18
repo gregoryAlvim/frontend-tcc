@@ -1,13 +1,12 @@
 import * as z from 'zod'
 import * as S from './styles'
+import { useForm } from 'react-hook-form'
 import { Category } from '../../../../@types/mockes'
-import { priceFormatter } from '../../../../utils/formatter'
-import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { apiPrivate } from '../../../../lib/axios'
 import { useContextSelector } from 'use-context-selector'
+import { priceFormatter } from '../../../../utils/formatter'
 import { PlanningContext } from '../../../../contexts/plannings/PlanningContext'
-import { simulateEscapeKey } from '../../../../utils/simulateEscapeKey'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 interface NewPlanningStepThreeProps {
   totalMonthlyRevenue: number
@@ -91,9 +90,11 @@ export function NewPlanningStepThree({
         </S.CategoryCard>
       ))}
 
-      <button type="submit" disabled={isSubmitting}>
-        Salvar Planejamento
-      </button>
+      <DefaultButton
+        type="submit"
+        disabled={isSubmitting}
+        title="Salvar Planejamento"
+      />
     </S.FormStepThree>
   )
 }
