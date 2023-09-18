@@ -151,7 +151,7 @@ export function UpdateTransactionModal({
 
   return (
     <ModalScreen title="Editando transação">
-      <form
+      <S.FormContainer
         id="defaultUpdateForm"
         onSubmit={handleSubmit(handleUpdateTransaction)}
       >
@@ -255,7 +255,7 @@ export function UpdateTransactionModal({
         <button type="submit" disabled={isSubmitting}>
           Atualizar
         </button>
-      </form>
+      </S.FormContainer>
     </ModalScreen>
   )
 }

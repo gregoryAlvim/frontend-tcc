@@ -17,8 +17,6 @@ export function Transactions() {
         <Menu initialIndexSelected={0} />
       </S.TransactionsHeader>
 
-      <SearchForm />
-
       <S.TransactionsTable>
         <tbody>
           {transactions.map((transaction) => (
@@ -31,7 +29,6 @@ export function Transactions() {
                 </S.PriceHighLight>
               </td>
               <td>{transaction.category.name}</td>
-              <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
             </tr>
           ))}
         </tbody>
