@@ -13,6 +13,10 @@ export function NewObjectiveModal() {
     setCurrentStep(step)
   }
 
+  function resetStepForm() {
+    handleChangeStepForm(1)
+  }
+
   function handleSuggestionsDataFromFormOne(data: Suggestion[]) {
     setSuggestions(data)
     handleChangeStepForm(2)
@@ -23,7 +27,7 @@ export function NewObjectiveModal() {
   }
 
   return (
-    <ModalScreen title="Novo objetivo">
+    <ModalScreen title="Novo objetivo" actionToClosed={resetStepForm}>
       {currentStep === 1 && (
         <NewObjectiveFormOne
           handlePreObjective={handlePreObjectiveDataFromFormOne}
