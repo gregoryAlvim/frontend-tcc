@@ -7,7 +7,10 @@ interface SidebarContainerProps {
 }
 
 export const SidebarContainer = styled.header<SidebarContainerProps>`
+  z-index: 2;
   height: 100vh;
+  grid-area: menu;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

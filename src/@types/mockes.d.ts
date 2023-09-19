@@ -11,10 +11,10 @@ export interface User {
 }
 
 export interface Category {
-  id: string
+  id?: string
   name: string
   type: 'income' | 'expense'
-  createdAt: string
+  createdAt?: string
 }
 
 export interface Expense {
