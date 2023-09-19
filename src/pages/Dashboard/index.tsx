@@ -1,12 +1,18 @@
 import * as S from './styles'
+import { useState } from 'react'
 import { Summary } from '../../components/Summary'
 import { useSummary } from '../../hooks/useSummary'
 import { priceFormatter } from '../../utils/formatter'
 import { MonthlyBalance } from './components/MonthlyBalance'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
+import { PlanningsSlider } from './components/PlanningsSlider'
 
 export function Dashboard() {
   const summary = useSummary()
+
+  const currentDate = new Date()
+  const [selectedDate, setSelectedDate] = useState(currentDate)
+  const selectedMonth = (selectedDate.getMonth() + 1).toString()
 
   const cardsToSummary = [
     {
@@ -38,7 +44,7 @@ export function Dashboard() {
 
       <S.DashboardSubTitle>Planejamentos</S.DashboardSubTitle>
 
-      <span>fazer depois que a tela de planejamentos estiver pronta!</span>
+      <PlanningsSlider selectedMonth={selectedMonth} />
     </S.DashboardContainer>
   )
 }
