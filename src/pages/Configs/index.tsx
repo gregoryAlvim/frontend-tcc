@@ -1,3 +1,12 @@
+import { Categories } from '../Categories'
+import * as S from './styles'
+
 export function Configs() {
-  return <h1>Configurações / Categorias</h1>
+  return (
+    <S.ConfigContainer>
+      <h1>Configurações</h1>
+
+      <Categories />
+    </S.ConfigContainer>
+  )
 }
