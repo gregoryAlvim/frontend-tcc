@@ -24,7 +24,9 @@ export function AppRoutes() {
             path="/"
             element={
               <PlanningProvider>
-                <Dashboard />
+                <ExpenseProvider>
+                  <Dashboard />
+                </ExpenseProvider>
               </PlanningProvider>
             }
           />
