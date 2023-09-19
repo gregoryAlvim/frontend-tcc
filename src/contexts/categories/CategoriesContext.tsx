@@ -5,6 +5,7 @@ interface CategoriesContextType {
   categories: Category[]
   categoriesToIncome: Category[]
   categoriesToExpense: Category[]
+  createNewCategory: (data: Category) => void
 }
 
 export const CategoriesContext = createContext({} as CategoriesContextType)

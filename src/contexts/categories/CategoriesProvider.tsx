@@ -4,6 +4,8 @@ import { CategoriesContext } from './CategoriesContext'
 import { categoriesReducer } from '../../reducers/categories/reducer'
 import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 import { fetchCategoriesAction } from '../../reducers/categories/actions'
+import { Category } from '../../@types/mockes'
+import { ToastMessages } from '../../utils/ToastMessages'
 
 interface CategoriesProviderProps {
   children: ReactNode
@@ -37,13 +39,31 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
     }
   }, [])
 
+  async function createNewCategory(data: Category) {
+    const { name, type } = data
+
+    const response = await apiPrivate.post('categories/create-category', {
+      name,
+      type,
+    })
+
+    ToastMessages.showToastSuccess(response.data.message)
+
+    fetchCategories()
+  }
+
   useEffect(() => {
     fetchCategories()
   }, [fetchCategories])
 
   return (
     <CategoriesContext.Provider
-      value={{ categories, categoriesToIncome, categoriesToExpense }}
+      value={{
+        categories,
+        createNewCategory,
+        categoriesToIncome,
+        categoriesToExpense,
+      }}
     >
       {children}
     </CategoriesContext.Provider>
