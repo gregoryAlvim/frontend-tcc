@@ -52,6 +52,19 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
     fetchCategories()
   }
 
+  async function updateCategory(categoryUUID: string, name: string) {
+    const response = await apiPrivate.patch(
+      `categories/update-category-by/${categoryUUID}`,
+      {
+        name,
+      },
+    )
+
+    ToastMessages.showToastSuccess(response.data.message)
+
+    fetchCategories()
+  }
+
   useEffect(() => {
     fetchCategories()
   }, [fetchCategories])
@@ -60,6 +73,7 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
     <CategoriesContext.Provider
       value={{
         categories,
+        updateCategory,
         createNewCategory,
         categoriesToIncome,
         categoriesToExpense,
