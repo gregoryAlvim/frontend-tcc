@@ -5,7 +5,7 @@ interface NewTransactionButtonProps {
   variant?: 'income' | 'expense'
 }
 
-export const NewTransactionButton = styled.button<NewTransactionButtonProps>`
+export const NewItemButton = styled.button<NewTransactionButtonProps>`
   display: flex;
   align-items: center;
   gap: 1rem;

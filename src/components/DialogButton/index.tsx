@@ -10,11 +10,11 @@ interface DialogButtonProps {
 }
 
 export function DialogButton({
-  title,
   icon,
+  title,
+  action,
   type = 'income',
   noBorder = false,
-  action,
 }: DialogButtonProps) {
   return (
     <Dialog.Root>
@@ -22,10 +22,10 @@ export function DialogButton({
         {noBorder ? (
           <S.OpenModalButton>{icon}</S.OpenModalButton>
         ) : (
-          <S.NewTransactionButton variant={type}>
+          <S.NewItemButton variant={type}>
             {icon}
             {title}
-          </S.NewTransactionButton>
+          </S.NewItemButton>
         )}
       </Dialog.Trigger>
 
