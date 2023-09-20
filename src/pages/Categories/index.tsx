@@ -1,8 +1,8 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { Circle, Plus } from 'phosphor-react'
 import * as Switch from '@radix-ui/react-switch'
 import { useContextSelector } from 'use-context-selector'
+import { Circle, PencilSimple, Plus } from 'phosphor-react'
 import { DialogButton } from '../../components/DialogButton'
 import { NewCategoryModal } from './components/NewCategoryModal'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
@@ -69,7 +69,19 @@ export function Categories() {
               <tr key={category.id}>
                 <td>{category.name}</td>
                 <td>{category.type === 'expense' ? 'Saída' : 'Entrada'}</td>
-                <td></td>
+                <td>
+                  <DialogButton
+                    title=""
+                    noBorder
+                    icon={<PencilSimple />}
+                    action={
+                      <NewCategoryModal
+                        selectedCategory={category}
+                        typeOfCategory={typeChecked}
+                      />
+                    }
+                  />
+                </td>
               </tr>
             ),
           )}
