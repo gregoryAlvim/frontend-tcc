@@ -58,7 +58,6 @@ export function PlanningProvider({ children }: PlanningProviderProps) {
     subPlanningId: string,
     data: PlanningsByCategoryProps,
   ) {
-    console.log(data)
     const response = await apiPrivate.patch(
       `plannings-by-category/update-planning-by-category-by/${subPlanningId}`,
       {

@@ -17,36 +17,20 @@ import { TransactionsProvider } from '../contexts/transactions/TransactionsProvi
 
 export function AppRoutes() {
   return (
-    <Compose components={[TransactionsProvider, CategoriesProvider]}>
+    <Compose components={[IncomeProvider, ExpenseProvider, CategoriesProvider]}>
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route
             path="/"
             element={
               <PlanningProvider>
-                <ExpenseProvider>
-                  <Dashboard />
-                </ExpenseProvider>
+                <Dashboard />
               </PlanningProvider>
             }
           />
           <Route path="/transactions" element={<Transactions />} />
-          <Route
-            path="/transactions/receitas"
-            element={
-              <IncomeProvider>
-                <Incomes />
-              </IncomeProvider>
-            }
-          />
-          <Route
-            path="/transactions/despesas"
-            element={
-              <ExpenseProvider>
-                <Expenses />
-              </ExpenseProvider>
-            }
-          />
+          <Route path="/transactions/receitas" element={<Incomes />} />
+          <Route path="/transactions/despesas" element={<Expenses />} />
           <Route
             path="/objectives"
             element={
@@ -59,11 +43,7 @@ export function AppRoutes() {
             path="/plannings"
             element={
               <PlanningProvider>
-                <IncomeProvider>
-                  <ExpenseProvider>
-                    <Plannings />
-                  </ExpenseProvider>
-                </IncomeProvider>
+                <Plannings />
               </PlanningProvider>
             }
           />
