@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { apiPrivate } from '../../../../lib/axios'
 import { dateInputFormatter } from '../../../../utils/formatter'
 import { ObjectivePreview, Suggestion } from '../../../../@types/mockes'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 interface NewObjectiveFormOneProps {
   handleSuggestions: (data: Suggestion[]) => void
@@ -78,9 +79,11 @@ export function NewObjectiveFormOne({
           {...register('initialValue', { valueAsNumber: true })}
         />
 
-        <button type="submit" disabled={isSubmitting}>
-          Gerar opções
-        </button>
+        <DefaultButton
+          type="submit"
+          title="Gerar opções"
+          disabled={isSubmitting}
+        />
       </S.FormContainer>
     </>
   )

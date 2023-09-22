@@ -13,6 +13,7 @@ import { simulateEscapeKey } from '../../../../utils/simulateEscapeKey'
 import { IncomeContext } from '../../../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
 import { CategoriesContext } from '../../../../contexts/categories/CategoriesContext'
+import { DefaultButton } from '../../../../components/DefaultButton'
 
 const updateTransactionFormSchema = z.object({
   id: z.string().optional(),
@@ -252,9 +253,11 @@ export function UpdateTransactionModal({
           name="isPayOrIsReceived"
         />
 
-        <button type="submit" disabled={isSubmitting}>
-          Atualizar
-        </button>
+        <DefaultButton
+          type="submit"
+          title="Atualizar"
+          disabled={isSubmitting}
+        />
       </S.FormContainer>
     </ModalScreen>
   )
