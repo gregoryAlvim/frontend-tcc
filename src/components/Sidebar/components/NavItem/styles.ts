@@ -43,7 +43,7 @@ export const NavItemContainer = styled.ul`
   }
 `
 interface NavLinkProps {
-  variant?: string
+  readonly variant?: string
 }
 
 export const NavLink = styled(Link)<NavLinkProps>`
@@ -53,7 +53,8 @@ export const NavLink = styled(Link)<NavLinkProps>`
   align-items: center;
   text-decoration: none;
   justify-content: center;
-  color: ${(props) => props.theme.white};
+  color: ${(props) =>
+    props.variant === 'true' ? props.theme['purple-300'] : props.theme.white};
 
   &:hover {
     color: ${(props) => props.theme['purple-500']};

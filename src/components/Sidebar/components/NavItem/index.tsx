@@ -3,22 +3,24 @@ import * as S from './styles'
 
 interface NavItemProps {
   title: string
+  variant?: boolean
   redirectTo: string
   isMenuOpen: boolean
-  icon: React.ReactNode
   onClick?: () => void
+  icon: React.ReactNode
 }
 
 export function NavItem({
   icon,
   title,
+  variant,
+  onClick,
   redirectTo,
   isMenuOpen,
-  onClick,
 }: NavItemProps) {
   return (
     <S.NavItemContainer>
-      <S.NavLink to={redirectTo} onClick={onClick}>
+      <S.NavLink to={redirectTo} onClick={onClick} variant={`${variant}`}>
         {icon}
         {isMenuOpen ? (
           <S.NavTitle
