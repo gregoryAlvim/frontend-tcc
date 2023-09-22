@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 
-export const MenuTable = styled.div`
+interface MenuTableProps {
+  variant: 'true' | 'false'
+}
+
+export const MenuTable = styled.div<MenuTableProps>`
   width: 100%;
   height: 6rem;
   margin-top: 4rem;
-  background: ${(props) => props.theme['gray-700']};
+  background: ${(props) =>
+    props.variant === 'false' ? props.theme['gray-700'] : 'none'};
   display: flex;
   align-items: center;
   justify-content: center;

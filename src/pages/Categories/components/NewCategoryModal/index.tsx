@@ -8,15 +8,23 @@ import { useContextSelector } from 'use-context-selector'
 import { CategoriesContext } from '../../../../contexts/categories/CategoriesContext'
 import { simulateEscapeKey } from '../../../../utils/simulateEscapeKey'
 import { useEffect } from 'react'
+import { Category } from '../../../../@types/mockes'
 
 interface NewCategoryModalProps {
   typeOfCategory: boolean
+  selectedCategory?: Category
 }
 
-export function NewCategoryModal({ typeOfCategory }: NewCategoryModalProps) {
-  const createNewCategory = useContextSelector(CategoriesContext, (context) => {
-    return context.createNewCategory
-  })
+export function NewCategoryModal({
+  typeOfCategory,
+  selectedCategory,
+}: NewCategoryModalProps) {
+  const { createNewCategory, updateCategory } = useContextSelector(
+    CategoriesContext,
+    (context) => {
+      return context
+    },
+  )
 
   const newCategoryModalSchema = z.object({
     name: z.string(),
@@ -33,6 +41,7 @@ export function NewCategoryModal({ typeOfCategory }: NewCategoryModalProps) {
   } = useForm<NewCategoryModalInputs>({
     resolver: zodResolver(newCategoryModalSchema),
     defaultValues: {
+      name: selectedCategory ? selectedCategory.name : '',
       type: typeOfCategory ? 'income' : 'expense',
     },
   })
@@ -43,18 +52,37 @@ export function NewCategoryModal({ typeOfCategory }: NewCategoryModalProps) {
     simulateEscapeKey()
   }
 
+  async function handleUpdateCategoryById(data: NewCategoryModalInputs) {
+    const { name } = data
+
+    if (selectedCategory?.id !== undefined) {
+      updateCategory(selectedCategory.id, name)
+      reset()
+      simulateEscapeKey()
+    }
+  }
+
   useEffect(() => {
-    reset({ name: '', type: typeOfCategory ? 'income' : 'expense' })
-  }, [typeOfCategory, reset])
+    reset({
+      name: selectedCategory ? selectedCategory.name : '',
+      type: typeOfCategory ? 'income' : 'expense',
+    })
+  }, [typeOfCategory, reset, selectedCategory])
 
   return (
-    <ModalScreen title="Nova categoria">
-      <S.NewCategoryForm onSubmit={handleSubmit(handleCreateNewCategory)}>
+    <ModalScreen
+      title={selectedCategory ? 'Atualizar categoria' : 'Nova categoria'}
+    >
+      <S.NewCategoryForm
+        onSubmit={handleSubmit(
+          selectedCategory ? handleUpdateCategoryById : handleCreateNewCategory,
+        )}
+      >
         <input type="text" placeholder="Nome" {...register('name')} />
 
         <DefaultButton
           type="submit"
-          title="Cadastrar"
+          title={selectedCategory ? 'Atualizar' : 'Cadastrar'}
           disabled={isSubmitting}
         />
       </S.NewCategoryForm>

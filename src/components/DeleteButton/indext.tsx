@@ -1,3 +1,5 @@
+import { DeleteItemModal } from '../DeleteItemModal'
+import { DialogButton } from '../DialogButton'
 import * as S from './styles'
 import { X } from 'phosphor-react'
 
@@ -7,8 +9,10 @@ interface DeleteButtonProps {
 
 export function DeleteButton({ actionOnClick }: DeleteButtonProps) {
   return (
-    <S.deleteItemButton onClick={actionOnClick}>
-      <X />
-    </S.deleteItemButton>
+    <DialogButton
+      noBorder
+      icon={<X color="#F75A68" />}
+      action={<DeleteItemModal action={actionOnClick} />}
+    />
   )
 }

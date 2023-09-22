@@ -42,7 +42,7 @@ export const OpenModalButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme['purple-500']};
+    opacity: 0.5;
     transition: all 0.3s;
   }
 `

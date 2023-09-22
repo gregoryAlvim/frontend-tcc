@@ -6,13 +6,22 @@ import { priceFormatter } from '../../utils/formatter'
 import { MonthlyBalance } from './components/MonthlyBalance'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { PlanningsSlider } from './components/PlanningsSlider'
+import { DatePickerMenu } from '../../components/DatePickerMenu'
 
 export function Dashboard() {
-  const summary = useSummary()
+  const { summary, fetchTransactions } = useSummary()
 
   const currentDate = new Date()
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const selectedMonth = (selectedDate.getMonth() + 1).toString()
+
+  const handleDateChange = (date: any) => {
+    setSelectedDate(date)
+
+    const year = date?.getFullYear()
+    const month = date?.getMonth() + 1
+    fetchTransactions(month, year)
+  }
 
   const cardsToSummary = [
     {
@@ -34,6 +43,12 @@ export function Dashboard() {
 
   return (
     <S.DashboardContainer>
+      <DatePickerMenu
+        noBackground={true}
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+      />
+
       <S.DashboardTitle>Dashboard</S.DashboardTitle>
 
       <Summary cards={cardsToSummary} />

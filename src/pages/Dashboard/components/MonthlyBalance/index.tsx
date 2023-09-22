@@ -6,7 +6,7 @@ import { useSummary } from '../../../../hooks/useSummary'
 import { priceFormatter } from '../../../../utils/formatter'
 
 export function MonthlyBalance() {
-  const summary = useSummary()
+  const { summary } = useSummary()
 
   const [progress, setProgress] = useState({
     toIncome: 0,

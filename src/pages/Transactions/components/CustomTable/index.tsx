@@ -13,6 +13,8 @@ import {
   X,
 } from 'phosphor-react'
 import { DeleteButton } from '../../../../components/DeleteButton/indext'
+import { DeleteItemModal } from '../../../../components/DeleteItemModal'
+import { DialogButton } from '../../../../components/DialogButton'
 
 interface CustomTableProps {
   data: (Income | Expense)[]
