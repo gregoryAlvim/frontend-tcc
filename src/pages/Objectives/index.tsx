@@ -17,6 +17,7 @@ import { useObjectivesSummary } from '../../hooks/useObjectivesSummary'
 import { dateStringFormatter, priceFormatter } from '../../utils/formatter'
 import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
 import { ParcelsModal } from './components/ParcelsModal'
+import { DeleteButton } from '../../components/DeleteButton/indext'
 
 export function Objectives() {
   const summary = useObjectivesSummary()
@@ -139,12 +140,9 @@ export function Objectives() {
                 action={<ParcelsModal parcels={objective.parcels} />}
               />
 
-              <S.ItemButton
-                className="deleteButton"
-                onClick={() => handleActionDeleteItem(objective.id)}
-              >
-                <X />
-              </S.ItemButton>
+              <DeleteButton
+                actionOnClick={() => handleActionDeleteItem(objective.id)}
+              />
             </S.CardActions>
           </S.CardItem>
         ))}
