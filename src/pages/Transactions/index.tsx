@@ -1,6 +1,7 @@
 import * as S from './styles'
 import { Menu } from './components/Menu'
 import { Doughnut } from 'react-chartjs-2'
+import { useSummary } from '../../hooks/useSummary'
 import { useCallback, useEffect, useState } from 'react'
 import { useContextSelector } from 'use-context-selector'
 import { Category, Expense, Income } from '../../@types/mockes'
@@ -8,12 +9,9 @@ import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
-import { priceFormatter } from '../../utils/formatter'
+import { DatePickerMenu } from '../../components/DatePickerMenu'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
-
-// Despesas por categorias
-// Receitas por categorias
 
 interface AccumulatedCategoryProps {
   total: number
@@ -31,6 +29,11 @@ export function Transactions() {
     dataExpensesCategory: [],
   })
 
+  const currentDate = new Date()
+  const [selectedDate, setSelectedDate] = useState(currentDate)
+
+  const { fetchTransactions } = useSummary()
+
   const { categoriesToExpense, categoriesToIncome } = useContextSelector(
     CategoriesContext,
     (context) => {
@@ -45,6 +48,14 @@ export function Transactions() {
   const incomes = useContextSelector(IncomeContext, (context) => {
     return context.incomes
   })
+
+  const handleDateChange = (date: any) => {
+    setSelectedDate(date)
+
+    const year = date?.getFullYear()
+    const month = date?.getMonth() + 1
+    fetchTransactions(month, year)
+  }
 
   const accumulateCategoryWithValue = useCallback(
     (category: string, arrayData: Income[] | Expense[]) => {
@@ -153,6 +164,13 @@ export function Transactions() {
       <S.TransactionsHeader>
         <Menu initialIndexSelected={0} />
       </S.TransactionsHeader>
+
+      <DatePickerMenu
+        noBackground={true}
+        selectedDate={selectedDate}
+        handleDateChange={handleDateChange}
+      />
+
       <S.GraphicsContainer>
         <S.GraphicsItem>
           <span>Receitas por categorias</span>
