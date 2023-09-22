@@ -8,14 +8,16 @@ import { IncomeContext } from '../../contexts/income/IncomeContext'
 interface DatePickerMenuProps {
   handleDateChange: (date: any) => void
   selectedDate: Date
+  noBackground?: boolean
 }
 
 export function DatePickerMenu({
   selectedDate,
   handleDateChange,
+  noBackground = false,
 }: DatePickerMenuProps) {
   return (
-    <S.MenuTable>
+    <S.MenuTable variant={`${noBackground}`}>
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
