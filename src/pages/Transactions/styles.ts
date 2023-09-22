@@ -41,3 +41,19 @@ export const PriceHighLight = styled.span<PriceHighLightProps>`
       ? props.theme['green-300']
       : props.theme['red-300']};
 `
+
+export const GraphicsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+
+export const GraphicsItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  width: 40rem;
+  height: 40rem;
+
+  align-items: center;
+`
