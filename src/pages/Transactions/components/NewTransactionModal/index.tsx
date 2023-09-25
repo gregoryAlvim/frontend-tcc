@@ -18,7 +18,7 @@ import { DefaultButton } from '../../../../components/DefaultButton'
 const newTransactionFormSchema = z.object({
   description: z.string(),
   date: z.string(),
-  value: z.number(),
+  value: z.number().nonnegative(),
   categoryUUID: z.string(),
   type: z.enum(['income', 'expense']),
   isPayOrIsReceived: z.boolean(),

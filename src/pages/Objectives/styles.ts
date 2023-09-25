@@ -79,7 +79,7 @@ export const CardContent = styled.div`
   margin-bottom: 2rem;
 
   .ObjectiveDescription {
-    width: 20rem;
+    width: 30rem;
   }
 
   .ObjectiveDates {

@@ -13,41 +13,43 @@ export function ParcelsModal({ parcels }: ParcelsModalProps) {
   return (
     <ModalScreen title="Parcelas">
       <S.ParcelsContainer>
-        <thead>
-          <tr>
-            <td>
-              <strong>N°</strong>
-            </td>
-            <td>
-              <strong>Valor</strong>
-            </td>
-            <td>
-              <strong>Mês</strong>
-            </td>
-            <td>
-              <strong>Foi paga</strong>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {parcels &&
-            parcels.map((parcel) => (
-              <tr key={parcel.id}>
-                <td>
-                  <strong>{parcel.portion}</strong>
-                </td>
-                <td>
-                  <span>{priceFormatter.format(parcel.value)}</span>
-                </td>
-                <td>
-                  <span>{getPortugueseMonth(parcel.month)}</span>
-                </td>
-                <td>
-                  <SwitchParcel isPaid={parcel.isPaid} parcelId={parcel.id} />
-                </td>
-              </tr>
-            ))}
-        </tbody>
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <strong>N°</strong>
+              </td>
+              <td>
+                <strong>Valor</strong>
+              </td>
+              <td>
+                <strong>Mês</strong>
+              </td>
+              <td>
+                <strong>Foi paga</strong>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            {parcels &&
+              parcels.map((parcel) => (
+                <tr key={parcel.id}>
+                  <td>
+                    <strong>{parcel.portion}</strong>
+                  </td>
+                  <td>
+                    <span>{priceFormatter.format(parcel.value)}</span>
+                  </td>
+                  <td>
+                    <span>{getPortugueseMonth(parcel.month)}</span>
+                  </td>
+                  <td>
+                    <SwitchParcel isPaid={parcel.isPaid} parcelId={parcel.id} />
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </S.ParcelsContainer>
     </ModalScreen>
   )

@@ -25,4 +25,27 @@ export const GlobalStyle = createGlobalStyle`
     body, input, textarea, button {
       font: 400 1.6rem Roboto, sans-serif;
     }
+
+  ::-webkit-scrollbar {
+    width: 1rem;
+    padding: 1rem;
+  } 
+
+/* Track */
+  ::-webkit-scrollbar-track {
+    background-color: ${(props) => props.theme['gray-800']};
+    padding: 1rem;
+  } 
+
+/* Handle */
+ ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme['purple-300']};
+    border-radius: 6px;
+ 
+  } 
+
+/* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+  background-color: ${(props) => props.theme['purple-500']};
+  } 
 `

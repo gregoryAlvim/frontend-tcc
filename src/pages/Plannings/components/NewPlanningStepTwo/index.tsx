@@ -45,7 +45,7 @@ export function NewPlanningStepTwo({
 
   const optionsExpenseToSelect = categoriesToExpense.map((category) => {
     return {
-      id: category.id,
+      id: category.id ?? '',
       value: category.name,
       label: category.name,
     }
