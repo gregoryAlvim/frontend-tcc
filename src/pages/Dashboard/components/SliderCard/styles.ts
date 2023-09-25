@@ -6,6 +6,7 @@ export const SliderCard = styled.div`
   gap: 1rem;
   width: 30rem;
   height: 22rem;
+  cursor: grab;
 
   background: ${(props) => props.theme['gray-600']};
   border-radius: 6px;
