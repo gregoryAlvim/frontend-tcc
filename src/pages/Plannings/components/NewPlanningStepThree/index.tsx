@@ -25,7 +25,7 @@ export function NewPlanningStepThree({
 
   const categorySchema = z.object({
     category_uuid: z.string(),
-    goal: z.number(),
+    goal: z.number().nonnegative(),
   })
 
   const newPlanningStepThreeSchema = z.object({

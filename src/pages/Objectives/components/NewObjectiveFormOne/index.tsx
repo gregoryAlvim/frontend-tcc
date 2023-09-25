@@ -17,10 +17,10 @@ export function NewObjectiveFormOne({
   handlePreObjective,
 }: NewObjectiveFormOneProps) {
   const newObjectiveFormOneSchema = z.object({
-    description: z.string(),
+    description: z.string().max(28),
     date: z.string(),
-    goal: z.number(),
-    initialValue: z.number(),
+    goal: z.number().nonnegative(),
+    initialValue: z.number().nonnegative(),
   })
 
   type NewObjectiveFormOneInputs = z.infer<typeof newObjectiveFormOneSchema>

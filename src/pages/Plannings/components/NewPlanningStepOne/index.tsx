@@ -12,7 +12,7 @@ export function NewPlanningStepOne({
   handleSetDataStepOne,
 }: NewPlanningStepOneProps) {
   const newPlanningStepOneSchema = z.object({
-    totalMonthlyRevenue: z.number(),
+    totalMonthlyRevenue: z.number().nonnegative(),
   })
 
   type NewPlanningStepOneInputs = z.infer<typeof newPlanningStepOneSchema>
