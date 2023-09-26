@@ -1,8 +1,7 @@
 import { styled } from 'styled-components'
 
 export const ExpensesContainer = styled.main`
-  width: 100%;
-  max-width: 1120px;
+  min-width: 32rem;
   margin: 8rem auto 0;
   padding: 0 1.5rem;
 `

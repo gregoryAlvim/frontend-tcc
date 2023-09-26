@@ -45,6 +45,7 @@ export const SliderCard = styled.div`
   .ProgressIndicator {
     position: relative;
     background-color: ${(props) => props.theme['red-300']};
+
     width: 100%;
     height: 100%;
     transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
@@ -57,6 +58,8 @@ export const SliderCard = styled.div`
     transform: translate(-50%, -50%);
     font-size: 14px;
     color: ${(props) => props.theme['gray-900']};
+
+    font-weight: bold;
   }
 `
 

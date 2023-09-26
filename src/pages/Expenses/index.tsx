@@ -5,7 +5,7 @@ import {
   ArrowCircleDown,
 } from 'phosphor-react'
 import * as S from './styles'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Summary } from '../../components/Summary'
 import { Menu } from '../Transactions/components/Menu'
 import { priceFormatter } from '../../utils/formatter'
@@ -16,11 +16,18 @@ import { useExpensesSummary } from '../../hooks/useExpenseSummary'
 import { CustomTable } from '../Transactions/components/CustomTable'
 import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { NewTransactionModal } from '../Transactions/components/NewTransactionModal'
+import { DatePickerContext } from '../../contexts/transactions/DatePickerContext'
 
 export function Expenses() {
-  const currentDate = new Date()
   const summary = useExpensesSummary()
-  const [selectedDate, setSelectedDate] = useState(currentDate)
+
+  const { selectedDate, handleChangeSelectedDate } = useContextSelector(
+    DatePickerContext,
+    (context) => {
+      return context
+    },
+  )
+
   const { expenses, fetchExpenses } = useContextSelector(
     ExpenseContext,
     (context) => {
@@ -45,13 +52,20 @@ export function Expenses() {
     },
   ]
 
-  const handleDateChange = (date: any) => {
-    setSelectedDate(date)
+  const handleDateChange = useCallback(
+    (date: any) => {
+      handleChangeSelectedDate(date)
 
-    const year = date?.getFullYear()
-    const month = date?.getMonth() + 1
-    fetchExpenses(month, year)
-  }
+      const year = date?.getFullYear()
+      const month = date?.getMonth() + 1
+      fetchExpenses(month, year)
+    },
+    [handleChangeSelectedDate, fetchExpenses],
+  )
+
+  useEffect(() => {
+    handleDateChange(selectedDate)
+  }, [handleDateChange, selectedDate])
 
   return (
     <S.ExpensesContainer>

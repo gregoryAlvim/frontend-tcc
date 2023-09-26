@@ -7,16 +7,23 @@ import { MonthlyBalance } from './components/MonthlyBalance'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { PlanningsSlider } from './components/PlanningsSlider'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
+import { useContextSelector } from 'use-context-selector'
+import { DatePickerContext } from '../../contexts/transactions/DatePickerContext'
 
 export function Dashboard() {
   const { summary, fetchTransactions } = useSummary()
 
-  const currentDate = new Date()
-  const [selectedDate, setSelectedDate] = useState(currentDate)
+  const { selectedDate, handleChangeSelectedDate } = useContextSelector(
+    DatePickerContext,
+    (context) => {
+      return context
+    },
+  )
+
   const selectedMonth = (selectedDate.getMonth() + 1).toString()
 
   const handleDateChange = (date: any) => {
-    setSelectedDate(date)
+    handleChangeSelectedDate(date)
 
     const year = date?.getFullYear()
     const month = date?.getMonth() + 1

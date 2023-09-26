@@ -1,12 +1,9 @@
 import { css, styled } from 'styled-components'
 
 export const SummaryContainer = styled.section`
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 35rem));
+  justify-content: space-between;
   gap: 2rem;
 `
 
@@ -15,6 +12,7 @@ interface SummaryCardProps {
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
+  width: 100%;
   background: ${(props) => props.theme['gray-600']};
   border-radius: 6px;
   padding: 2rem;

@@ -14,6 +14,7 @@ import { IncomeContext } from '../../../../contexts/income/IncomeContext'
 import { ExpenseContext } from '../../../../contexts/expense/ExpenseContext'
 import { CategoriesContext } from '../../../../contexts/categories/CategoriesContext'
 import { DefaultButton } from '../../../../components/DefaultButton'
+import { DatePickerContext } from '../../../../contexts/transactions/DatePickerContext'
 
 const updateTransactionFormSchema = z.object({
   id: z.string().optional(),
@@ -43,13 +44,23 @@ export function UpdateTransactionModal({
     },
   )
 
-  const updateIncome = useContextSelector(IncomeContext, (context) => {
-    return context.updateIncome
+  const selectedDate = useContextSelector(DatePickerContext, (context) => {
+    return context.selectedDate
   })
 
-  const updateExpense = useContextSelector(ExpenseContext, (context) => {
-    return context.updateExpense
-  })
+  const { updateIncome, fetchIncomes } = useContextSelector(
+    IncomeContext,
+    (context) => {
+      return context
+    },
+  )
+
+  const { updateExpense, fetchExpenses } = useContextSelector(
+    ExpenseContext,
+    (context) => {
+      return context
+    },
+  )
 
   function createOptionsToSelect(items: Category[]) {
     const resultOptions = items.map((item) => {
@@ -108,6 +119,9 @@ export function UpdateTransactionModal({
       isPayOrIsReceived,
     } = data
 
+    const year = selectedDate?.getFullYear().toString()
+    const month = (selectedDate?.getMonth() + 1).toString()
+
     const inputDate = parse(date, 'yyyy-MM-dd', new Date())
     const formattedDate = format(inputDate, 'dd/MM/yyyy')
 
@@ -127,6 +141,7 @@ export function UpdateTransactionModal({
         }
 
         updateIncome(newIncome)
+        fetchIncomes(month, year)
         simulateEscapeKey()
       }
     } else if (type === 'expense') {
@@ -145,6 +160,7 @@ export function UpdateTransactionModal({
         }
 
         updateExpense(newExpense)
+        fetchExpenses(month, year)
         simulateEscapeKey()
       }
     }

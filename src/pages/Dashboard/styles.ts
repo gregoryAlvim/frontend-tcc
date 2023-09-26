@@ -1,9 +1,7 @@
 import { styled } from 'styled-components'
 
 export const DashboardContainer = styled.main`
-  width: 100%;
-  max-width: 1120px;
-  margin: 8rem auto 0;
+  margin: 2rem 0 2rem;
   padding: 0 1.5rem;
 `
 

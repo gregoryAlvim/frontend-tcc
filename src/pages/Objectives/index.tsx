@@ -17,7 +17,7 @@ import { useObjectivesSummary } from '../../hooks/useObjectivesSummary'
 import { dateStringFormatter, priceFormatter } from '../../utils/formatter'
 import { ObjectiveContext } from '../../contexts/objectives/ObjectiveContext'
 import { ParcelsModal } from './components/ParcelsModal'
-import { DeleteButton } from '../../components/DeleteButton/indext'
+import { DeleteButton } from '../../components/DeleteButton/index'
 
 export function Objectives() {
   const summary = useObjectivesSummary()

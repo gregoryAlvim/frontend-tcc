@@ -10,6 +10,7 @@ import { ExpenseContext } from '../../contexts/expense/ExpenseContext'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { CategoriesContext } from '../../contexts/categories/CategoriesContext'
 import { DatePickerMenu } from '../../components/DatePickerMenu'
+import { DatePickerContext } from '../../contexts/transactions/DatePickerContext'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -29,10 +30,14 @@ export function Transactions() {
     dataExpensesCategory: [],
   })
 
-  const currentDate = new Date()
-  const [selectedDate, setSelectedDate] = useState(currentDate)
-
   const { fetchTransactions } = useSummary()
+
+  const { selectedDate, handleChangeSelectedDate } = useContextSelector(
+    DatePickerContext,
+    (context) => {
+      return context
+    },
+  )
 
   const { categoriesToExpense, categoriesToIncome } = useContextSelector(
     CategoriesContext,
@@ -50,7 +55,7 @@ export function Transactions() {
   })
 
   const handleDateChange = (date: any) => {
-    setSelectedDate(date)
+    handleChangeSelectedDate(date)
 
     const year = date?.getFullYear()
     const month = date?.getMonth() + 1
