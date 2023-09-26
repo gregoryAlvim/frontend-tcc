@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import * as Progress from '@radix-ui/react-progress'
 import * as Separator from '@radix-ui/react-separator'
 import { useContextSelector } from 'use-context-selector'
@@ -16,36 +16,35 @@ export function SliderCard({ planningByCategory }: SliderCardProps) {
     return context.expenses
   })
 
-  const [expensesCalc, setExpensesCalc] = useState({
-    pagas: 0,
-    previstas: 0,
-    total: 0,
-  })
+  function checkPercentageNumber(value: number): number {
+    if (value > 100) {
+      return 100
+    } else {
+      return value
+    }
+  }
 
-  function filterExpenseByCategory(category: string) {
+  const expensesCalc = useMemo(() => {
     const expensesByCategory = expenses.filter(
-      (expense) => expense.category.name === category,
+      (expense) => expense.category.name === planningByCategory.category.name,
     )
 
-    const totalValue = expensesByCategory?.reduce(
+    const totalValue = expensesByCategory.reduce(
       (acc, expense) => {
-        if (expense.category.name === category) {
-          if (expense.isPay === true) {
-            acc.pagas += expense.value
-            acc.total += expense.value
-          } else {
-            acc.previstas += expense.value
-            acc.total += expense.value
-          }
+        if (expense.isPay === true) {
+          acc.pagas += expense.value
+          acc.total += expense.value
+        } else {
+          acc.previstas += expense.value
+          acc.total += expense.value
         }
-
         return acc
       },
       { pagas: 0, previstas: 0, total: 0 },
     )
 
-    setExpensesCalc(totalValue)
-  }
+    return totalValue
+  }, [expenses, planningByCategory.category.name])
 
   function calculatePlanningPercentage() {
     const planningPercentage = Number(
@@ -54,10 +53,6 @@ export function SliderCard({ planningByCategory }: SliderCardProps) {
 
     return planningPercentage
   }
-
-  useEffect(() => {
-    filterExpenseByCategory(planningByCategory.category.name)
-  })
 
   return (
     <S.SliderCard>
@@ -91,7 +86,9 @@ export function SliderCard({ planningByCategory }: SliderCardProps) {
         <Progress.Indicator
           className="ProgressIndicator"
           style={{
-            transform: `translateX(-${100 - calculatePlanningPercentage()}%)`,
+            transform: `translateX(-${
+              100 - checkPercentageNumber(calculatePlanningPercentage())
+            }%)`,
           }}
         />
         <span className="ProgressContent">{`${calculatePlanningPercentage()}%`}</span>
