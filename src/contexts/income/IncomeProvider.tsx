@@ -67,8 +67,6 @@ export function IncomeProvider({ children }: IncomeProviderProps) {
     })
 
     ToastMessages.showToastSuccess(response.data.message)
-
-    fetchIncomes()
   }
 
   async function deleteIncome(incomeId: string) {

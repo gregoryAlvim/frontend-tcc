@@ -70,8 +70,6 @@ export function ExpenseProvider({ children }: ExpenseProviderProps) {
     )
 
     ToastMessages.showToastSuccess(response.data.message)
-
-    fetchExpenses()
   }
 
   async function deleteExpense(expenseId: string) {
