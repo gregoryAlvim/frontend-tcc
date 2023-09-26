@@ -5,7 +5,7 @@ import {
   ArrowCircleDown,
 } from 'phosphor-react'
 import * as S from './styles'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Menu } from '../Transactions/components/Menu'
 import { Summary } from '../../components/Summary'
 import { useContextSelector } from 'use-context-selector'
@@ -16,11 +16,17 @@ import { IncomeContext } from '../../contexts/income/IncomeContext'
 import { DialogButton } from '../../components/DialogButton'
 import { priceFormatter } from '../../utils/formatter'
 import { NewTransactionModal } from '../Transactions/components/NewTransactionModal'
+import { DatePickerContext } from '../../contexts/transactions/DatePickerContext'
 
 export function Incomes() {
-  const currentDate = new Date()
   const summary = useIncomesSummary()
-  const [selectedDate, setSelectedDate] = useState(currentDate)
+
+  const { selectedDate, handleChangeSelectedDate } = useContextSelector(
+    DatePickerContext,
+    (context) => {
+      return context
+    },
+  )
 
   const { incomes, fetchIncomes } = useContextSelector(
     IncomeContext,
@@ -47,13 +53,20 @@ export function Incomes() {
     },
   ]
 
-  const handleDateChange = (date: any) => {
-    setSelectedDate(date)
+  const handleDateChange = useCallback(
+    (date: any) => {
+      handleChangeSelectedDate(date)
 
-    const year = date?.getFullYear()
-    const month = date?.getMonth() + 1
-    fetchIncomes(month, year)
-  }
+      const year = date?.getFullYear()
+      const month = date?.getMonth() + 1
+      fetchIncomes(month, year)
+    },
+    [handleChangeSelectedDate, fetchIncomes],
+  )
+
+  useEffect(() => {
+    handleDateChange(selectedDate)
+  }, [handleDateChange, selectedDate])
 
   return (
     <S.IncomesContainer>

@@ -13,11 +13,18 @@ import { ExpenseProvider } from '../contexts/expense/ExpenseProvider'
 import { PlanningProvider } from '../contexts/plannings/PlanningProvider'
 import { ObjectiveProvider } from '../contexts/objectives/ObjectiveProvider'
 import { CategoriesProvider } from '../contexts/categories/CategoriesProvider'
-import { TransactionsProvider } from '../contexts/transactions/TransactionsProvider'
+import { DatePickerProvider } from '../contexts/transactions/DatePickerProvider'
 
 export function AppRoutes() {
   return (
-    <Compose components={[IncomeProvider, ExpenseProvider, CategoriesProvider]}>
+    <Compose
+      components={[
+        DatePickerProvider,
+        CategoriesProvider,
+        IncomeProvider,
+        ExpenseProvider,
+      ]}
+    >
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route

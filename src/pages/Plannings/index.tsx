@@ -10,10 +10,16 @@ import { NoPlanningOfMonth } from './components/NoPlanningOfMonth'
 import { usePlanningsSummary } from '../../hooks/usePlanningsSummary'
 import { PlanningContext } from '../../contexts/plannings/PlanningContext'
 import { ArrowCircleDown, ArrowCircleUp, RocketLaunch } from 'phosphor-react'
+import { DatePickerContext } from '../../contexts/transactions/DatePickerContext'
 
 export function Plannings() {
-  const currentDate = new Date()
-  const [selectedDate, setSelectedDate] = useState(currentDate)
+  const { selectedDate, handleChangeSelectedDate } = useContextSelector(
+    DatePickerContext,
+    (context) => {
+      return context
+    },
+  )
+
   const [currentPlanning, setCurrentPlanning] = useState<Planning | null>(null)
   const selectedMonth = (selectedDate.getMonth() + 1).toString()
 
@@ -60,7 +66,7 @@ export function Plannings() {
   }
 
   const handleDateChange = (date: any) => {
-    setSelectedDate(date)
+    handleChangeSelectedDate(date)
 
     const year = date?.getFullYear()
     const month = (date?.getMonth() + 1).toString()
