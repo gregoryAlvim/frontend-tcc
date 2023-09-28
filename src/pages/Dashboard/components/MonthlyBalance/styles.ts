@@ -23,6 +23,10 @@ export const MonthlyBalanceContainer = styled.article`
     width: 1px;
     height: 100%;
   }
+
+  @media (max-width: 750px) {
+    height: 100%;
+  }
 `
 
 interface MonthlyBalanceItemProps {
@@ -31,7 +35,7 @@ interface MonthlyBalanceItemProps {
 
 export const MonthlyBalanceItem = styled.div<MonthlyBalanceItemProps>`
   display: grid;
-  align-items: center;
+  align-items: end;
   grid-template-columns: 150px 2fr 200px;
 
   span {
@@ -76,5 +80,14 @@ export const MonthlyBalanceItem = styled.div<MonthlyBalanceItemProps>`
     transform: translate(-50%, -50%);
     font-size: 14px;
     color: ${(props) => props.theme['gray-900']};
+  }
+
+  @media (max-width: 750px) {
+    grid-template-columns: 150px;
+    gap: 1rem;
+
+    strong {
+      text-align: start;
+    }
   }
 `

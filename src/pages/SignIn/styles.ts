@@ -14,6 +14,13 @@ export const SignInContent = styled.article`
   display: flex;
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
+
+  @media (max-width: 830px) {
+    width: 40rem;
+    height: 100%;
+
+    flex-direction: column;
+  }
 `
 
 export const SignInForm = styled.form`
@@ -97,6 +104,10 @@ export const SignUpContainer = styled.article`
 
   a {
     margin-top: 3rem;
+  }
+
+  @media (max-width: 830px) {
+    margin: 4rem 0;
   }
 `
 

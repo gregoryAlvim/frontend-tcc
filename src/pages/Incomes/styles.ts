@@ -12,4 +12,8 @@ export const IncomesHeader = styled.header`
   justify-content: space-between;
 
   margin-bottom: 2rem;
+
+  @media (max-width: 560px) {
+    margin-bottom: 5rem;
+  }
 `

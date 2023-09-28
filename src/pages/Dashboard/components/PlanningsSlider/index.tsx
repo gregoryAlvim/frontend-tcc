@@ -21,6 +21,7 @@ interface PlanningsSliderProps {
 
 export function PlanningsSlider({ selectedMonth }: PlanningsSliderProps) {
   const [currentPlanning, setCurrentPlanning] = useState<Planning | null>(null)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const plannings = useContextSelector(PlanningContext, (context) => {
     return context.plannings
@@ -36,13 +37,28 @@ export function PlanningsSlider({ selectedMonth }: PlanningsSliderProps) {
   }
 
   useEffect(() => {
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', updateWindowWidth)
+
+    return () => {
+      window.removeEventListener('resize', updateWindowWidth)
+    }
+  }, [])
+
+  useEffect(() => {
     filterPlanningByMonth(selectedMonth)
   })
 
   return (
     <S.SliderContainer>
       {currentPlanning ? (
-        <Swiper slidesPerView={3}>
+        <Swiper
+          slidesPerView={windowWidth > 1300 ? 3 : 1}
+          spaceBetween={windowWidth > 1300 ? 60 : 20}
+        >
           {currentPlanning.planningsByCategory.map((planningByCategory) => (
             <SwiperSlide key={planningByCategory.id}>
               <SliderCard planningByCategory={planningByCategory} />

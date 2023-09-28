@@ -42,7 +42,12 @@ export function SignIn() {
           </S.SignInLabel>
           <S.SignInLabel>
             <span>Senha</span>
-            <S.SignInInput type="password" required {...register('password')} />
+            <S.SignInInput
+              required
+              type="password"
+              autoComplete="on"
+              {...register('password')}
+            />
           </S.SignInLabel>
           <S.SignInButton disabled={isSubmitting}>Entrar</S.SignInButton>
         </S.SignInForm>

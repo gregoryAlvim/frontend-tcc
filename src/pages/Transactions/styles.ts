@@ -5,7 +5,9 @@ export const TransactionsContainer = styled.main`
   padding: 0 1.5rem;
 `
 
-export const TransactionsHeader = styled.header``
+export const TransactionsHeader = styled.header`
+  max-width: 33rem;
+`
 
 export const TransactionsTable = styled.table`
   width: 100%;
@@ -44,13 +46,19 @@ export const GraphicsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+  }
 `
 
 export const GraphicsItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  width: 40rem;
+  max-width: 40rem;
   height: 40rem;
 
   align-items: center;

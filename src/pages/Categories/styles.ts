@@ -41,6 +41,12 @@ export const CategoriesHeader = styled.header`
   justify-content: space-between;
 
   margin-bottom: 2rem;
+
+  @media (max-width: 760px) {
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+  }
 `
 
 export const SwitchTypeContainer = styled.div`

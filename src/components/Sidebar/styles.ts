@@ -21,6 +21,10 @@ export const SidebarContainer = styled.header<SidebarContainerProps>`
   background: ${(props) => props.theme['gray-900']};
   transition: width ${animationDuration}ms ease-in-out;
   width: ${(props) => (props.variant === 'true' ? '20rem' : '6rem')};
+
+  @media (max-width: 560px) {
+    height: 100%;
+  }
 `
 
 export const DropdownMenuButton = styled.button`

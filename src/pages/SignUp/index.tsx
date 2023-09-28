@@ -45,7 +45,12 @@ export function SignUp() {
           </S.SignUpLabel>
           <S.SignUpLabel>
             <span>Senha</span>
-            <S.SignUpInput type="password" required {...register('password')} />
+            <S.SignUpInput
+              required
+              type="password"
+              autoComplete="on"
+              {...register('password')}
+            />
           </S.SignUpLabel>
           <S.SignUpButton disabled={isSubmitting}>Cadastrar</S.SignUpButton>
         </S.SignUpForm>
