@@ -4,7 +4,7 @@ export const SliderCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 30rem;
+
   height: 22rem;
   cursor: grab;
 

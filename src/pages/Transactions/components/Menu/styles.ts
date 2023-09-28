@@ -1,7 +1,6 @@
 import { styled } from 'styled-components'
 
 export const TransactionsMenu = styled.nav`
-  width: 33rem;
   padding: 1rem;
   height: 100%;
   max-width: 1120px;
@@ -30,6 +29,16 @@ export const TransactionsMenu = styled.nav`
 
   a {
     text-decoration: none;
+  }
+
+  @media (max-width: 560px) {
+    display: flex;
+    flex-direction: column;
+
+    .SeparatorRoot[data-orientation='vertical'] {
+      height: 2px;
+      width: 50%;
+    }
   }
 `
 

@@ -5,6 +5,10 @@ export const SummaryContainer = styled.section`
   grid-template-columns: repeat(auto-fit, minmax(20rem, 35rem));
   justify-content: space-between;
   gap: 2rem;
+
+  @media (max-width: 1300px) {
+    justify-content: flex-start;
+  }
 `
 
 interface SummaryCardProps {
